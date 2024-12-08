@@ -1,0 +1,120 @@
+<div class="container" style="background: white;">
+    <div class="Title" style="margin-top: 10px;">
+        <div>
+            Cart
+        </div>
+    </div>
+
+    <h3>Cart Information</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>No.</td>
+            <td>Name</td>
+            <td>Origin</td>
+            <td>Unit Price/kg</td>
+            <td>Quantity</td>
+            <td>Total</td>
+            <td>Delete</td>
+        </thead>
+        <% if(!dataCart[0]) { %>
+            <tr>
+                <td colspan="7" style="text-align: center;">Nothing in the cart yet !!!</td>
+            </tr>
+        <% } else { 
+                counter = 0;
+                total = 0;
+                dataCart.forEach((data) => { %>
+                    <tr>
+                        <td><%= counter += 1 %></td>
+                        <td><%= data.ProductName %></td>
+                        <td><%= data.Origin %></td>
+                        <td><%= number_format(data.UnitPrice) %> <sup>VND</sup></td>
+                        <td>
+                            <form action="/customer/cart/update" method="post">
+                                <input class="input_table" type="number" name="Quantity" value="<%= data.Quantity %>" min="1" max="<%= data.StockQuantity + data.Quantity %>" oninput="this.value = Math.abs(this.value)" required>
+                                <input type="number" hidden name="OriginalQuantity" value="<%= data.Quantity %>">
+                                <input type="number" hidden name="ProductID" value="<%= data.ProductID %>">
+                                <input type="submit" value="Update">
+                            </form>
+                        </td>
+                        <td><%= number_format(data.Total) %> <sup>VND</sup></td>
+                        <td>
+                            <form action="/customer/cart/delete" method="post">
+                                <input type="text" hidden name="CartID" value="<%= data.ID %>">
+                                <input type="text" hidden name="ProductID" value="<%= data.ProductID %>">
+                                <input type="text" hidden name="Quantity" value="<%= data.Quantity %>">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                <%  total += data.Total ;
+                }) %>
+                <tfoot>
+                    <td colspan="5" style="text-align: right; border-right: 1px solid #333;">Total:</td>
+                    <td><%= number_format(total) %> <sup>VND</sup></td>
+                    <td></td>
+                </tfoot>
+        <% } %>
+    </table>
+    <style>
+        .input_cart,
+        textarea,
+        select {
+            min-width: 300px;
+            width: 50%;
+            background: #F7F7F7;
+            border: 1px solid #D6D6D6;
+            padding: 5px 10px;
+        }
+        .input_table{
+            max-width: 80px;
+            min-width: 80px;
+            width: 50%;
+            background: #F7F7F7;
+            border: 1px solid #D6D6D6;
+            padding: 5px 10px;
+        }
+    </style>
+        
+    <div style="margin-left: 2%;">
+        <h3>Customer Information</h3>
+        <form action="/customer/cart/order" method="post" style="margin: auto;max-width: 50%;">
+            <div class="order_item">
+                <p>Full Name: <span>*</span></p><input class="input_cart" type="text" name="full_name" required>
+            </div>
+            <div class="order_item">
+                <p>Phone Number: <span>*</span></p><input class="input_cart" type="tel" name="phone" maxlength="10" pattern="[0-9]{10}" required>
+            </div>
+            <div class="order_item">
+                <p>City/Province: <span>*</span></p><select class="" id="city" aria-label=".form-select-sm" name="city">
+                    <option value="" selected></option>
+                </select>
+            </div>
+            <div class="order_item">
+                <p>District: <span>*</span></p><select class="" id="district" aria-label=".form-select-sm" name="district">
+                    <option value="" selected></option>
+                </select>
+            </div>
+            <div class="order_item">
+                <p>Ward: <span>*</span></p><select class="" id="ward" aria-label=".form-select-sm" name="ward">
+                    <option value="" selected></option>
+                </select>
+            </div>
+            <div class="order_item">
+                <p>Detailed Address: </p><input class="input_cart" type="text" name="DetailedAddress">
+            </div>
+            <div class="order_item">
+                <p style="align-self: flex-start;">Notes: </p><textarea name="notes" id="" cols="30" rows="10" maxlength="200" placeholder="Maximum 200 characters"></textarea>
+            </div>
+            <% if(dataCart[0]) { %>
+                <input type="number" value="<%= total %>" hidden name="totalAmount">
+            <% } else { %>
+                <input type="text" hidden required>
+            <% } %>
+            <div style="margin-bottom: 10px; margin-left: 10%;">
+                <button type="button" class="btn btn-success"><a href="/customer/home" style="text-decoration: none;">Continue Shopping</a></button>
+                <button class="btn btn-danger" type="submit">Place Order</button>
+            </div>
+        </form>
+    </div>
+</div>

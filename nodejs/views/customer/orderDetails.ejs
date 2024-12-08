@@ -1,0 +1,60 @@
+<div class="container" style="background: white;">
+    <div class="Title" style="margin-top: 10px;">
+        <div>
+            Orders
+        </div>
+    </div>
+    <h3>Orders</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>No.</td>
+            <td>Recipient Name</td>
+            <td>Address</td>
+            <td>Phone Number</td>
+            <td>Total</td>
+            <td>Date of Purchase</td>
+            <td>Note</td>
+            <td>Status</td>
+        </thead>
+        <tr>
+            <td>1</td>
+            <td><%= dataOrder[0].RecipientName %></td>
+            <td><%= dataOrder[0].Address %></td>
+            <td><%= dataOrder[0].PhoneNumber %></td>
+            <td><%= number_format(dataOrder[0].Total) %> <sup>VND</sup></td>
+            <td><%= dataOrder[0].DateOfPurchase %></td>
+            <td><%= dataOrder[0].Status %></td>
+            <td><%= dataOrder[0].TenTT %></td>
+        </tr>
+    </table>
+</div>
+<div class="container" style="background: white;">
+    <div class="Title" style="margin-top: 10px;">
+        <div>
+            Order Details
+        </div>
+    </div>
+
+    <h3>Details</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>No.</td>
+            <td>Product Name</td>
+            <td>Origin</td>
+            <td>Unit Price</td>
+            <td>Quantity</td>
+            <td>Total Price</td>
+        </thead>
+        <% dem = 0;
+        dataOrderDetails.forEach((data) => { %>
+            <tr>
+                <td><%= dem += 1 %></td>
+                <td><%= data.ProductName %></td>
+                <td><%= data.Origin %></td>
+                <td><%= number_format(data.UnitPrice) %> <sup>VND</sup></td>
+                <td><%= data.Quantity %></td>
+                <td><%= number_format(data.TotalPrice) %> <sup>VND</sup></td>
+            </tr>
+        <% }) %>
+    </table>
+</div>

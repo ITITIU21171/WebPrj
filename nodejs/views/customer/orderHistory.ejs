@@ -1,0 +1,41 @@
+<div class="container" style="background: white;">
+    <div class="Title" style="margin-top: 10px;">
+        <div>
+            Order History
+        </div>
+    </div>
+
+    <h3>Order History</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>No.</td>
+            <td>Recipient Name</td>
+            <td>Address</td>
+            <td>Phone Number</td>
+            <td>Total Amount</td>
+            <td>Purchase Date</td>
+            <td>Note</td>
+            <td>Status</td>
+        </thead>
+        <% if(!dataOrders[0]) { %>
+            <tr>
+                <td colspan="8" style="text-align: center;">No orders yet !!!</td>
+            </tr>
+        <% } else {
+            counter = 0;
+            dataOrders.forEach((data) => { %>
+                <tr>
+                    <td><%= counter += 1 %></td>
+                    <td><%= data.RecipientName %></td>
+                    <td><%= data.Address %></td>
+                    <td><%= data.PhoneNumber %></td>
+                    <td><%= data.TotalAmount %> <sup>VND</sup></td>
+                    <td><%= data.PurchaseDate %></td>
+                    <td><%= data.Note %></td>
+                    <td><%= data.Status %></td>
+                    <td><a href="/customer/order/details/<%= data.ID %>" style="color: blue;">Details</a></td>
+                </tr>
+            <% })
+        } %>
+    </table>
+</div>

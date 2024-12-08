@@ -1,0 +1,33 @@
+<body>
+    <% dataHomeCategories.forEach((category) => { %>
+        <div class="container">
+            <div class="Title" style="margin-top: 10px;">
+                <div>
+                    <%= category.Name %>
+                </div>
+            </div>
+            <div class="row">
+                <% counter = 1; dataHomeProducts.forEach((product) => {
+                    if(category.ID == product.CategoryID && counter <= 4 ){ %>
+                        <div class="col-sm-3"><a href="/customer/product/details/<%= category.ID %>/<%= product.ID %>" style="color: black;">
+                            <div class="card" style="width: 18rem;">
+                            <img src="/admin/image/<%= product.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
+                            <div class="card-body">
+                                Name: <%= product.ProductName %><br>
+                                Origin: <%= product.Origin %><br>
+                                Price: <%= product.Price %>/kg<br>
+                                Quantity:  <%= product.Quantity %>kg
+                            </div>
+                            </div></a>
+                        </div>
+                    <%  counter += 1
+                    }
+                }) %>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin: 10px 0px;">
+                <button class="btn btn-primary me-md-2" type="button" style="background: #00e85d;border-color: #00e85d;"><a href="/customer/product/category/<%= category.ID %>">View All <i class="fa fa-arrow-right" aria-hidden="true"></i></a></button>
+            </div>
+        </div>
+    <% }) %>
+</body>
