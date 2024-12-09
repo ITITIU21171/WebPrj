@@ -1,0 +1,345 @@
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: #474e5d;
+        padding-top: 50px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    .input {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    .input:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    .clearfix{
+        display: flex;
+        justify-content: space-around;
+    }
+    .custom-select-sp select{
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        background-color: #f1f1f1;
+        border: none;
+        appearance: none;
+    }
+</style>
+<h2>Product Management</h2>
+<div style="text-align: center;">
+    <input type="text" id="myInput" onkeyup="search_table_sp()" placeholder="Search for names.."
+        title="Type in a name">
+    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Add Product</button>
+    <!-- <button style="width:auto;">Lịch sử sản phẩm</button> -->
+</div>
+
+<table id="myTable">
+    <tr class="header">
+        <th>No</th>
+        <th>ID</th>
+        <th>Type of Product</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Listed Price</th>
+        <th>Export Price</th>
+        <th>Quantity</th>
+        <th>Added Date</th>
+        <th>Modified Date</th>
+        <th>Origin</th>
+        <th>Available</th>
+        <th colspan="2" class="cog"><i class="fa fa-cog" aria-hidden="true"></i></th>
+    </tr>
+    <% dataSp.forEach((data)=>{ %>
+        <tr>
+            <td>
+                <%= SttSp +=1 %>
+            </td>
+            <td>
+                <%= data.ID %>
+            </td>
+            <td style="color: <% if(data.show_lsp == 0) { %> #fe7c21 <% } else { %> #8acf18 <% } %>">
+                <%= data.TypeOfProduct %>
+            </td>
+            <td>
+                <img src="/admin/image/<%= data.imgName %>" alt="" style="max-width: 60px">
+            </td>
+            <td>
+                <%= data.ProductName %>
+            </td>
+            <td>
+                <%= data.ListedPrice %>
+            </td>
+            <td>
+                <%= data.ExportPrice %>
+            </td>
+            <td>
+                <%= data.Quantity %>
+            </td>
+            <td>
+                <%= data.AddedDate %>
+            </td>
+            <td>
+                <%= data.update_at %>
+            </td>
+            <td style="color: <% if(data.show_xx == 0) { %> #fe7c21 <% } else { %> #8acf18 <% } %>">
+                <%= data.Origin %>
+            </td>
+            <% if (data.show_sp == 0) { %>
+            <td style="color: #fe7c21;">NO</td>
+            <% }else { %>
+            <td style="color: #8acf18;">YES</td>
+            <% } %>
+            <td  class="cog">
+                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Change</button>
+                <div id="update<%= data.ID %>" class="modal">
+                    <span onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <form class="modal-content" action="/admin/Product/update/<%= data.ID %>" method="post" enctype="multipart/form-data">
+                        <div class="container">
+                            <h1 style="text-align:center;">Change Product</h1>
+                            <hr>
+                
+                            <label for=""><b>Type Of Product: </b></label>
+                            <div class="custom-select-sp">
+                                <select name="loaiSp" required>
+                                    <option value="<%= data.ID_TypeOfProduct + ',' + data.show_lsp  %>"><%= data.TypeOfProduct %></option>
+                                    <% dataLsp.forEach((dataItem) => { 
+                                        if(dataItem.ID != data.ID_TypeOfProduct) { %>
+                                        <option value="<%= dataItem.ID + ',' + dataItem.showw %>"><%= dataItem.TypeOfProduct %></option>
+                                        <% }
+                                     }) %>
+                                </select>
+                            </div>
+                                
+                            </section>
+                            
+                            <label for=""><b>Image: </b></label>
+                            <img src="/admin/image/<%= data.imgName %>" alt="" style="max-width: 60px">
+                            <input type="text" value="<%= data.imgName %>" name="imgName" hidden>
+                            <input class="input" type="file" name="fileImage" accept="image/*" >
+                            
+                            <label for=""><b>Name: </b></label>
+                            <input class="input" type="text" placeholder="Input name of product" name="ProductName" value="<%= data.ProductName %>" required>
+                            
+                            <label for=""><b>Listed Price: </b></label>
+                            <input class="input" type="number" placeholder="Input listed price" name="ListedPrice" value="<%= data.ListedPrice %>" oninput="this.value = Math.abs(this.value)" min="0" required>
+                            
+                            <label for=""><b>Export Price: </b></label>
+                            <input class="input" type="number" placeholder="Input export price" name="ExportPrice" value="<%= data.ExportPrice %>" oninput="this.value = Math.abs(this.value)" min="0" required>
+                            
+                            <label for=""><b>Quantity: </b></label>
+                            <input class="input" type="number" placeholder="Input quantity" name="Quantity" value="<%= data.Quantity %>" oninput="this.value = Math.abs(this.value)" min="0" required>
+                            
+                            <label for=""><b>Origin: </b></label>
+                            <div class="custom-select-sp" >
+                                <select name="Origin" required>
+                                    <option value="<%= data.ID_Origin + ',' + data.show_xx %>"><%= data.Origin %></option>
+                                    <% dataXx.forEach((dataItem) => { 
+                                        if(dataItem.ID != data.ID_Origin) { %>
+                                        <option value="<%= dataItem.ID + ',' + dataItem.showw %>"><%= dataItem.Origin %></option>
+                                        <% }
+                                     }) %>
+                                </select>
+                            </div>
+                            
+                            <div class="clearfix">
+                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Exit</button>
+                                <button type="submit" class="CUDbtn">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <% if (data.show_sp == 0) { %>
+                <button><a style="color: #8acf18;" href="/admin/Product/show/<%= data.ID %>">Show</a></button>
+                <% }else { %>
+                <button><a style="color: #fe7c21;" href="/admin/Product/hidden/<%= data.ID %>">Hide</a></button>
+                <% } %>
+            </td>
+        </tr>
+        <% }) %>
+</table>
+
+<div id="create" class="modal">
+    <span onclick="document.getElementById('create').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" action="/admin/Product/create" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <h1 style="text-align:center;">Add Product</h1>
+            <hr>
+
+            <label for=""><b>Type of Product: </b></label>
+            <div class="custom-select-sp">
+                <select name="TypeOfProduct" required>
+                    <option value="">--Choose type of product--</option>
+                    <% dataLsp.forEach((data) => { %>
+                        <option value="<%= data.ID + ',' + data.showw %>"><%= data.TypeOfProduct %></option>
+                    <% }) %>
+                </select>
+            </div>
+            
+            <label for=""><b>Image: </b></label>
+            <input class="input" type="file" name="fileImage" accept="image/*" required>
+            <!-- <input type="text" hidden name="fileImageText"> -->
+            
+            <label for=""><b>Name: </b></label>
+            <input class="input" type="text" placeholder="Input name of product" name="ProductName" required>
+            
+            <label for=""><b>Listed Price: </b></label>
+            <input class="input" type="number" placeholder="Input listed price" name="ListedPrice" oninput="this.value = Math.abs(this.value)" min="0" required>
+            
+            <label for=""><b>Export Price: </b></label>
+            <input class="input" type="number" placeholder="Input export price" name="ExportPrice" oninput="this.value = Math.abs(this.value)" min="0" required>
+            
+            <label for=""><b>Quantity: </b></label>
+            <input class="input" type="number" placeholder="Input quantity" name="Quantity" oninput="this.value = Math.abs(this.value)" min="0" required>
+            
+            <label for=""><b>Origin: </b></label>
+            <div class="custom-select-sp">
+                <select name="Origin" required>
+                    <option value="">-From-</option>
+                    <% dataXx.forEach((data) => { %>
+                        <option value="<%= data.ID + ',' + data.showw %>"><%= data.Origin %></option>
+                    <% }) %>
+                </select>
+            </div>
+            
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Exit</button>
+                <button type="submit" class="CUDbtn">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- <div id="del" class="modal">
+    <span onclick="document.getElementById('del').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" action="/admin/san-pham/delete" method="post">
+        <div class="container">
+            <h1 style="text-align:center;">Thêm sản phẩm</h1>
+            <hr>
+            <label for=""><b>Tên loại sản phẩm: </b></label>
+            <input class="input" type="text" placeholder="Nhập tên loại sản phẩm" name="nameLsp" required>
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('del').style.display='none'" class="cancelbtn">Thoát</button>
+                <button type="submit" class="CUDbtn">Thêm</button>
+            </div>
+        </div>
+    </form>
+</div> -->
+<% /* %><td  class="cog">
+    <button onclick="document.getElementById('del<%= data.ID %>').style.display='block'" style="width:auto;">Delete</button>
+    <div id="del<%= data.ID %>" class="modal">
+        <span onclick="document.getElementById('del<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content" action="/admin/Product/delete/<%= data.ID %>" method="post" enctype="multipart/form-data">
+            <div class="container">
+                <h1 style="text-align:center;">Delete</h1>
+                <hr>
+                <table id="myTable_bottom" style="margin-bottom: 10px;">
+                    <tr class="header_bottom">
+                        <th>No.</th>
+                        <th>ID</th>
+                        <th>Type of Product</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Listed Price</th>
+                        <th>Export Price</th>
+                        <th>Quantity</th>
+                        <th>Added Date</th>
+                        <th>Modified Date</th>
+                        <th>Origin</th>
+                    </tr>
+                    <tr>
+                        <td><%= SttSp %></td>
+                        <td><%= data.ID %></td>
+                        <td><%= data.TypeOfProduct %></td>
+                        <td>
+                            <img src="/admin/image/<%= data.imgName %>" alt="" style="max-width: 60px">
+                            <input type="text" value="<%= data.imgName %>" name="imgName" hidden>
+                        </td>
+                        <td><%= data.ProductName %></td>
+                        <td><%= data.Listed %></td>
+                        <td><%= data.ExportPrice %></td>
+                        <td><%= data.Quantity %></td>
+                        <td>
+                            <% if(data.Date <10 ) { %> 0<%= data.Date %> <% } else { %> <%= data.Date %> <% } %> -
+                            <% if(data.Month <10 ) { %> 0<%= data.Month %> <% } else { %> <%= data.Month %> <% } %> -
+                            <%= data.Year %>
+                        </td>
+                        <td>
+                            <% if(data.DateUp <10 ) { %> 0<%= data.DateUp %> <% } else { %> <%= data.DateUp %> <% } %> -
+                            <% if(data.MonthUp <10 ) { %> 0<%= data.MonthUp %> <% } else { %> <%= data.MonthUp %> <% } %> -
+                            <%= data.YearUp %>
+                        </td>
+                        <td><%= data.Origin %></td>
+                    </tr>
+                </table>
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('del<%= data.ID %>').style.display='none'" class="cancelbtn">Exit</button>
+                    <button type="submit" class="CUDbtn">Delete</button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</td> <% */ %>
