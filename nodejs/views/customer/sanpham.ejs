@@ -1,0 +1,60 @@
+<div class="container">
+    <% if(!dataXx) { 
+        if(!dataLsp[0]) { %>
+            <p style="text-align: center;">Không có trái cây nào</p>
+        <% } else { %>
+        <div class="Tieu_de" style="margin-top: 10px;">
+            <div>
+                <%= dataLsp[0].Ten %>
+            </div>
+        </div>
+        <div class="row">
+            <% dataLsp.forEach((dataSp) => {
+                 %>
+                    <div class="col-sm-3"><a href="/customer/san-pham/chi-tiet/<%= dataSp.ID_LoaiSanPham %>/<%= dataSp.ID %>" style="color: black;">
+                        <div class="card" style="width: 18rem;">
+                        <img src="/admin/image/<%= dataSp.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
+                        <div class="card-body">
+                            Tên: <%= dataSp.TenSanPham %><br>
+                            Xuất xứ: <%= dataSp.XuatXu %><br>
+                            Giá bán: <%= dataSp.GiaBan %>/kg<br>
+                            Số lượng:  <%= dataSp.SoLuong %>kg
+                        </div>
+                        </div></a>
+                    </div>
+                <%  
+                
+            }) %>
+        </div>
+        <% } %>
+    <% } 
+    if(!dataLsp) { 
+        if(!dataXx[0]) { %>
+            <p style="text-align: center;">Không có trái cây nào</p>
+        <% } else { %>
+        <div class="Tieu_de" style="margin-top: 10px;">
+            <div>
+                <%= dataXx[0].XuatXu %>
+            </div>
+        </div>
+        <div class="row">
+            <% dataXx.forEach((dataSp) => {
+                 %>
+                    <div class="col-sm-3"><a href="/customer/san-pham/chi-tiet/<%= dataSp.ID_XuatXu %>/<%= dataSp.ID %>" style="color: black;">
+                        <div class="card" style="width: 18rem;">
+                        <img src="/admin/image/<%= dataSp.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
+                        <div class="card-body">
+                            Tên: <%= dataSp.TenSanPham %><br>
+                            Xuất xứ: <%= dataSp.XuatXu %><br>
+                            Giá bán: <%= dataSp.GiaBan %>/kg<br>
+                            Số lượng:  <%= dataSp.SoLuong %>kg
+                        </div>
+                        </div></a>
+                    </div>
+                <%  
+            }) %>
+        </div>
+        <% } %>
+    <% } %>
+
+</div>

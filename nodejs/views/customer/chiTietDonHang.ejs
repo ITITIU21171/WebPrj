@@ -1,0 +1,60 @@
+<div class="container" style="background: white;">
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Đơn hàng
+        </div>
+    </div>
+    <h3>đơn hàng</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>STT</td>
+            <td>Tên người nhận</td>
+            <td>Địa chỉ</td>
+            <td>SĐT</td>
+            <td>Tổng tiền</td>
+            <td>Ngày mua</td>
+            <td>Ghi chú</td>
+            <td>Trạng thái</td>
+        </thead>
+        <tr>
+            <td>1</td>
+            <td><%= dataDonHang[0].TenKH %></td>
+            <td><%= dataDonHang[0].DiaChi %></td>
+            <td><%= dataDonHang[0].SDT %></td>
+            <td><%= number_format(dataDonHang[0].TongTien) %> <sup>vnđ</sup></td>
+            <td><%= dataDonHang[0].NgayMua %></td>
+            <td><%= dataDonHang[0].GhiChu %></td>
+            <td><%= dataDonHang[0].TenTT %></td>
+        </tr>
+    </table>
+</div>
+<div class="container" style="background: white;">
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Chi tiết đơn hàng
+        </div>
+    </div>
+
+    <h3>Chi tiết</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>STT</td>
+            <td>Tên sản phẩm</td>
+            <td>Xuất xứ</td>
+            <td>Đơn giá</td>
+            <td>Số lượng</td>
+            <td>Thành tiền</td>
+        </thead>
+        <% dem = 0;
+        dataChiTietDonHang.forEach((data) => { %>
+            <tr>
+                <td><%= dem += 1 %></td>
+                <td><%= data.TenSanPham %></td>
+                <td><%= data.XuatXu %></td>
+                <td><%= number_format(data.DonGia) %> <sup>vnđ</sup></td>
+                <td><%= data.SoLuong %></td>
+                <td><%= number_format(data.ThanhTien) %> <sup>vnđ</sup></td>
+            </tr>
+        <% }) %>
+    </table>
+</div>

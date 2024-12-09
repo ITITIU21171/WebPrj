@@ -1,68 +1,68 @@
 <% if(dataDetail.length==0){ %>
-    <p style="text-align: center;">CAN'T FOUND DATA</p>
+    <p style="text-align: center;">Không có dữ liệu</p>
     <% }else { %>
         <table id="myTable_top" style="margin-top: 12px;">
             <tr class="header_top">
                 <th>ID</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Status</th>
-                <th>Sign up Date</th>
+                <th>Tên tài khoản</th>
+                <th>Mật khẩu</th>
+                <th>Trạng thái</th>
+                <th>Ngày đăng ký</th>
             </tr>
             <tr>
                 <td>
                     <%= dataDetail[0].IDTK %>
                 </td>
                 <td>
-                    <%= dataDetail[0].AccountName %>
+                    <%= dataDetail[0].TenTK %>
                 </td>
                 <td>
-                    <%= dataDetail[0].Password %>
+                    <%= dataDetail[0].MatKhau %>
                 </td>
                 <td>
                     <%= dataDetail[0].TTTK %>
                 </td>
                 <td>
-                    <%= dataDetail[0].SignUpDate %>
+                    <%= dataDetail[0].NgayDK %>
                 </td>
             </tr>
         </table>
 
         <table id="myTable_top" style="margin-top: 12px;">
             <tr class="header_top">
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <th>Total</th>
-                <th>Ordered Date</th>
-                <th>Note</th>
-                <th>Status</th>
+                <th>ID Hóa đơn</th>
+                <th>Tên khách hàng</th>
+                <th>Địa chỉ</th>
+                <th>SĐT</th>
+                <th>Tổng tiền</th>
+                <th>Ngày mua</th>
+                <th>Ghi chú</th>
+                <th>Trạng thái</th>
             </tr>
             <tr>
                 <td>
                     <%= dataDetail[0].ID %>
                 </td>
                 <td>
-                    <%= dataDetail[0].CustomerName %>
+                    <%= dataDetail[0].TenKH %>
                 </td>
                 <td>
-                    <%= dataDetail[0].Address %>
+                    <%= dataDetail[0].DiaChi %>
                 </td>
                 <td>
-                    <%= dataDetail[0].PhoneNumber %>
+                    <%= dataDetail[0].SDT %>
                 </td>
                 <td>
-                    <%= dataDetail[0].Total %>
+                    <%= dataDetail[0].TongTien %>
                 </td>
                 <td>
-                    <%= dataDetail[0].OrderedDate %>
+                    <%= dataDetail[0].NgayMua %>
                 </td>
                 <td>
-                    <%= dataDetail[0].Note %>
+                    <%= dataDetail[0].GhiChu %>
                 </td>
                 <td>
-                    <%= dataDetail[0].StatusName %>
+                    <%= dataDetail[0].TenTT %>
                 </td>
             </tr>
         </table>
@@ -75,41 +75,41 @@
 
         <table id="myTable">
             <tr class="header">
-                <th>No.</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Origin</th>
-                <th>Cost</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th>STT</th>
+                <th>ID Sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Xuất xứ</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
             </tr>
             <% dataDetail.forEach((data)=> { %>
                 <tr>
                     <td>
-                        <%= No +=1 %>
+                        <%= STT +=1 %>
                     </td>
                     <td>
-                        <%= data.ProductID %>
+                        <%= data.IDSanPham %>
                     </td>
                     <td>
-                        <%= data.ProductName %>
+                        <%= data.TenSanPham %>
                     </td>
                     <td>
-                        <%= data.Origin %>
+                        <%= data.XuatXu %>
                     </td>
                     <td>
-                        <%= data.Cost %>
+                        <%= data.GiaBan %>
                     </td>
                     <td>
-                        <%= data.Quantity %>
+                        <%= data.SoLuong %>
                     </td>
                     <td>
-                        <%= data.Total %>
+                        <%= data.ThanhTien %>
                     </td>
                 </tr>
                 <% }) %>
         </table>
         <% } %>
             <div style="text-align: center;margin: 10px;">
-                <button><a href="/admin/user/Bought/<%= dataDetail[0].IDTK %>">Return</a></button>
+                <button><a href="/admin/user/san-pham-da-mua/<%= dataDetail[0].IDTK %>">Trở về</a></button>
             </div>

@@ -59,7 +59,7 @@
         cursor: pointer;
     }
 
-    .inputLsp {
+    .input {
         width: 100%;
         padding: 15px;
         margin: 5px 0 22px 0;
@@ -68,7 +68,7 @@
         background: #f1f1f1;
     }
 
-    .inputLsp:focus {
+    .input:focus {
         background-color: #ddd;
         outline: none;
     }
@@ -78,67 +78,67 @@
         justify-content: space-around;
     }
 </style>
-<h2>Manage Type Of Products</h2>
+<h2>Quản lý xuất xứ sản phẩm</h2>
 <div style="text-align: center;">
-    <input type="text" id="myInput" onkeyup="search_table_lsp()" placeholder="Search for names.."
+    <input type="text" id="myInput" onkeyup="search_table_xx()" placeholder="Search for names.."
         title="Type in a name">
-    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Add Products</button>
+    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Thêm xuất xứ</button>
 </div>
 
 <table id="myTable">
     <tr class="header">
-        <th>No.</th>
+        <th>STT</th>
         <th>ID</th>
-        <th>Name</th>
-        <th>Added Date</th>
-        <th>Updated Date</th>
-        <th>Available</th>
+        <th>Tên xuất xứ</th>
+        <th>Ngày thêm</th>
+        <th>Ngày cập nhật</th>
+        <th>Hiện trên web</th>
         <th colspan="2" class="cog"><i class="fa fa-cog" aria-hidden="true"></i></th>
     </tr>
-    <% dataLsp.forEach((data)=>{ %>
+    <% dataXx.forEach((data)=>{ %>
         <tr>
             <td>
-                <%= SttLsp +=1 %>
+                <%= SttXx +=1 %>
             </td>
             <td>
                 <%= data.ID %>
             </td>
             <td>
-                <%= data.Name %>
+                <%= data.XuatXu %>
             </td>
             <td>
-                <%= data.AddedDate %>
+                <%= data.NgayThem %>
             </td>
             <td>
                 <%= data.update_at %>
             </td>
             <% if (data.showw == 0) { %>
-            <td style="color: #fe7c21;">No</td>
+            <td style="color: #fe7c21;">Không</td>
             <% }else { %>
-            <td style="color: #8acf18;">Yes</td>
+            <td style="color: #8acf18;">Có</td>
             <% } %>
             <td  class="cog">
-                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Change</button>
+                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Sửa</button>
                 <div id="update<%= data.ID %>" class="modal">
                     <span onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    <form class="modal-content" action="/admin/TypeOfProduct/update/<%= data.ID %>" method="post">
+                    <form class="modal-content" action="/admin/xuat-xu-san-pham/update/<%= data.ID %>" method="post">
                         <div class="container">
-                            <h1 style="text-align:center;">Change type of product</h1>
+                            <h1 style="text-align:center;">Sửa xuất xứ</h1>
                             <hr>
-                            <label for=""><b>Name type of Product: </b></label>
-                            <input class="inputLsp" type="text" placeholder="Input name type of product" name="nameLsp" value="<%= data.Name %>" required>
+                            <label for=""><b>Tên xuất xứ: </b></label>
+                            <input class="input" type="text" placeholder="Nhập tên xuất xứ" name="nameXx" value="<%= data.XuatXu %>" required>
                             <div class="clearfix">
-                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Exit</button>
-                                <button type="submit" class="CUDbtn">Change</button>
+                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Thoát</button>
+                                <button type="submit" class="CUDbtn">Sửa</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </td>
             <% if (data.showw == 0) { %>
-            <td><button><a style="color: #8acf18;" href="/admin/TypeOfProduct/show/<%= data.ID %>">Show</a></button></td>
+            <td><button><a style="color: #8acf18;" href="/admin/xuat-xu-san-pham/show/<%= data.ID %>">Hiện</a></button></td>
             <% }else { %>
-            <td><button><a style="color: #fe7c21;" href="/admin/TypeOfProduct/hidden/<%= data.ID %>">Hide</a></button></td>
+            <td><button><a style="color: #fe7c21;" href="/admin/xuat-xu-san-pham/hidden/<%= data.ID %>">Ẩn</a></button></td>
             <% } %>
         </tr>
         <% }) %>
@@ -146,15 +146,15 @@
 
 <div id="create" class="modal">
     <span onclick="document.getElementById('create').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <form class="modal-content" action="/admin/TypeOfProduct/create" method="post">
+    <form class="modal-content" action="/admin/xuat-xu-san-pham/create" method="post">
         <div class="container">
-            <h1 style="text-align:center;">Add type of product</h1>
+            <h1 style="text-align:center;">Thêm xuất xứ</h1>
             <hr>
-            <label for=""><b>Name type of product: </b></label>
-            <input class="inputLsp" type="text" placeholder="Add name type of product" name="nameLsp" required>
+            <label for=""><b>Tên xuất xứ: </b></label>
+            <input class="input" type="text" placeholder="Nhập tên xuất xứ" name="nameXx" required>
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Exit</button>
-                <button type="submit" class="CUDbtn">Add</button>
+                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Thoát</button>
+                <button type="submit" class="CUDbtn">Thêm</button>
             </div>
         </div>
     </form>
@@ -162,12 +162,12 @@
 
 <!-- <div id="del" class="modal">
     <span onclick="document.getElementById('del').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <form class="modal-content" action="/admin/loai-san-pham/delete" method="post">
+    <form class="modal-content" action="/admin/xuat-xu-san-pham/delete" method="post">
         <div class="container">
             <h1 style="text-align:center;">Thêm sản phẩm</h1>
             <hr>
             <label for=""><b>Tên loại sản phẩm: </b></label>
-            <input class="inputLsp" type="text" placeholder="Nhập tên loại sản phẩm" name="nameLsp" required>
+            <input class="input" type="text" placeholder="Nhập tên loại sản phẩm" name="nameLsp" required>
             <div class="clearfix">
                 <button type="button" onclick="document.getElementById('del').style.display='none'" class="cancelbtn">Thoát</button>
                 <button type="submit" class="CUDbtn">Thêm</button>
@@ -175,21 +175,3 @@
         </div>
     </form>
 </div> -->
-
-<script>
-    // var create = document.getElementById('create');
-    // var update4 = document.getElementById('update4');
-    // var del = document.getElementById('delete');
-
-    // window.onclick = function (event) {
-    //     if (event.target == create) {
-    //         create.style.display = "none";
-    //     }
-    //     if (event.target == update4) {
-    //         update4.style.display = "none";
-    //     }
-    //     if (event.target == del) {
-    //         del.style.display = "none";
-    //     }
-    // }
-</script>

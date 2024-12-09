@@ -86,28 +86,28 @@
         appearance: none;
     }
 </style>
-<h2>Product Management</h2>
+<h2>Quản lý sản phẩm</h2>
 <div style="text-align: center;">
     <input type="text" id="myInput" onkeyup="search_table_sp()" placeholder="Search for names.."
         title="Type in a name">
-    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Add Product</button>
+    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Thêm sản phẩm</button>
     <!-- <button style="width:auto;">Lịch sử sản phẩm</button> -->
 </div>
 
 <table id="myTable">
     <tr class="header">
-        <th>No</th>
+        <th>STT</th>
         <th>ID</th>
-        <th>Type of Product</th>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Listed Price</th>
-        <th>Export Price</th>
-        <th>Quantity</th>
-        <th>Added Date</th>
-        <th>Modified Date</th>
-        <th>Origin</th>
-        <th>Available</th>
+        <th>Loại sản phẩm</th>
+        <th>Ảnh</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá nhập</th>
+        <th>Giá bán</th>
+        <th>Số lượng</th>
+        <th>Ngày thêm</th>
+        <th>Ngày sửa</th>
+        <th>Xuất xứ</th>
+        <th>Hiện sản phẩm</th>
         <th colspan="2" class="cog"><i class="fa fa-cog" aria-hidden="true"></i></th>
     </tr>
     <% dataSp.forEach((data)=>{ %>
@@ -119,53 +119,53 @@
                 <%= data.ID %>
             </td>
             <td style="color: <% if(data.show_lsp == 0) { %> #fe7c21 <% } else { %> #8acf18 <% } %>">
-                <%= data.TypeOfProduct %>
+                <%= data.LoaiSanPham %>
             </td>
             <td>
                 <img src="/admin/image/<%= data.imgName %>" alt="" style="max-width: 60px">
             </td>
             <td>
-                <%= data.ProductName %>
+                <%= data.TenSanPham %>
             </td>
             <td>
-                <%= data.ListedPrice %>
+                <%= data.GiaNhap %>
             </td>
             <td>
-                <%= data.ExportPrice %>
+                <%= data.GiaBan %>
             </td>
             <td>
-                <%= data.Quantity %>
+                <%= data.SoLuong %>
             </td>
             <td>
-                <%= data.AddedDate %>
+                <%= data.NgayNhap %>
             </td>
             <td>
                 <%= data.update_at %>
             </td>
             <td style="color: <% if(data.show_xx == 0) { %> #fe7c21 <% } else { %> #8acf18 <% } %>">
-                <%= data.Origin %>
+                <%= data.XuatXu %>
             </td>
             <% if (data.show_sp == 0) { %>
-            <td style="color: #fe7c21;">NO</td>
+            <td style="color: #fe7c21;">Không</td>
             <% }else { %>
-            <td style="color: #8acf18;">YES</td>
+            <td style="color: #8acf18;">Có</td>
             <% } %>
             <td  class="cog">
-                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Change</button>
+                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Sửa</button>
                 <div id="update<%= data.ID %>" class="modal">
                     <span onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    <form class="modal-content" action="/admin/Product/update/<%= data.ID %>" method="post" enctype="multipart/form-data">
+                    <form class="modal-content" action="/admin/san-pham/update/<%= data.ID %>" method="post" enctype="multipart/form-data">
                         <div class="container">
-                            <h1 style="text-align:center;">Change Product</h1>
+                            <h1 style="text-align:center;">Sửa sản phẩm</h1>
                             <hr>
                 
-                            <label for=""><b>Type Of Product: </b></label>
+                            <label for=""><b>Loại sản phẩm: </b></label>
                             <div class="custom-select-sp">
                                 <select name="loaiSp" required>
-                                    <option value="<%= data.ID_TypeOfProduct + ',' + data.show_lsp  %>"><%= data.TypeOfProduct %></option>
+                                    <option value="<%= data.ID_LoaiSanPham + ',' + data.show_lsp  %>"><%= data.LoaiSanPham %></option>
                                     <% dataLsp.forEach((dataItem) => { 
-                                        if(dataItem.ID != data.ID_TypeOfProduct) { %>
-                                        <option value="<%= dataItem.ID + ',' + dataItem.showw %>"><%= dataItem.TypeOfProduct %></option>
+                                        if(dataItem.ID != data.ID_LoaiSanPham) { %>
+                                        <option value="<%= dataItem.ID + ',' + dataItem.showw %>"><%= dataItem.LoaiSanPham %></option>
                                         <% }
                                      }) %>
                                 </select>
@@ -173,38 +173,38 @@
                                 
                             </section>
                             
-                            <label for=""><b>Image: </b></label>
+                            <label for=""><b>Ảnh: </b></label>
                             <img src="/admin/image/<%= data.imgName %>" alt="" style="max-width: 60px">
                             <input type="text" value="<%= data.imgName %>" name="imgName" hidden>
                             <input class="input" type="file" name="fileImage" accept="image/*" >
                             
-                            <label for=""><b>Name: </b></label>
-                            <input class="input" type="text" placeholder="Input name of product" name="ProductName" value="<%= data.ProductName %>" required>
+                            <label for=""><b>Tên sản phẩm: </b></label>
+                            <input class="input" type="text" placeholder="Nhập tên sản phẩm" name="tenSp" value="<%= data.TenSanPham %>" required>
                             
-                            <label for=""><b>Listed Price: </b></label>
-                            <input class="input" type="number" placeholder="Input listed price" name="ListedPrice" value="<%= data.ListedPrice %>" oninput="this.value = Math.abs(this.value)" min="0" required>
+                            <label for=""><b>Giá nhập: </b></label>
+                            <input class="input" type="number" placeholder="Nhập giá nhập" name="giaNhap" value="<%= data.GiaNhap %>" oninput="this.value = Math.abs(this.value)" min="0" required>
                             
-                            <label for=""><b>Export Price: </b></label>
-                            <input class="input" type="number" placeholder="Input export price" name="ExportPrice" value="<%= data.ExportPrice %>" oninput="this.value = Math.abs(this.value)" min="0" required>
+                            <label for=""><b>Giá bán: </b></label>
+                            <input class="input" type="number" placeholder="Nhập giá bán" name="giaBan" value="<%= data.GiaBan %>" oninput="this.value = Math.abs(this.value)" min="0" required>
                             
-                            <label for=""><b>Quantity: </b></label>
-                            <input class="input" type="number" placeholder="Input quantity" name="Quantity" value="<%= data.Quantity %>" oninput="this.value = Math.abs(this.value)" min="0" required>
+                            <label for=""><b>Số lượng: </b></label>
+                            <input class="input" type="number" placeholder="Nhập số lượng" name="soLuong" value="<%= data.SoLuong %>" oninput="this.value = Math.abs(this.value)" min="0" required>
                             
-                            <label for=""><b>Origin: </b></label>
+                            <label for=""><b>Xuất xứ: </b></label>
                             <div class="custom-select-sp" >
-                                <select name="Origin" required>
-                                    <option value="<%= data.ID_Origin + ',' + data.show_xx %>"><%= data.Origin %></option>
+                                <select name="xuatXu" required>
+                                    <option value="<%= data.ID_XuatXu + ',' + data.show_xx %>"><%= data.XuatXu %></option>
                                     <% dataXx.forEach((dataItem) => { 
-                                        if(dataItem.ID != data.ID_Origin) { %>
-                                        <option value="<%= dataItem.ID + ',' + dataItem.showw %>"><%= dataItem.Origin %></option>
+                                        if(dataItem.ID != data.ID_XuatXu) { %>
+                                        <option value="<%= dataItem.ID + ',' + dataItem.showw %>"><%= dataItem.XuatXu %></option>
                                         <% }
                                      }) %>
                                 </select>
                             </div>
                             
                             <div class="clearfix">
-                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Exit</button>
-                                <button type="submit" class="CUDbtn">Change</button>
+                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Thoát</button>
+                                <button type="submit" class="CUDbtn">Sửa</button>
                             </div>
                         </div>
                     </form>
@@ -212,9 +212,9 @@
             </td>
             <td>
                 <% if (data.show_sp == 0) { %>
-                <button><a style="color: #8acf18;" href="/admin/Product/show/<%= data.ID %>">Show</a></button>
+                <button><a style="color: #8acf18;" href="/admin/san-pham/show/<%= data.ID %>">Hiện</a></button>
                 <% }else { %>
-                <button><a style="color: #fe7c21;" href="/admin/Product/hidden/<%= data.ID %>">Hide</a></button>
+                <button><a style="color: #fe7c21;" href="/admin/san-pham/hidden/<%= data.ID %>">Ẩn</a></button>
                 <% } %>
             </td>
         </tr>
@@ -223,50 +223,50 @@
 
 <div id="create" class="modal">
     <span onclick="document.getElementById('create').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <form class="modal-content" action="/admin/Product/create" method="post" enctype="multipart/form-data">
+    <form class="modal-content" action="/admin/san-pham/create" method="post" enctype="multipart/form-data">
         <div class="container">
-            <h1 style="text-align:center;">Add Product</h1>
+            <h1 style="text-align:center;">Thêm sản phẩm</h1>
             <hr>
 
-            <label for=""><b>Type of Product: </b></label>
+            <label for=""><b>Loại sản phẩm: </b></label>
             <div class="custom-select-sp">
-                <select name="TypeOfProduct" required>
-                    <option value="">--Choose type of product--</option>
+                <select name="loaiSp" required>
+                    <option value="">--Chọn loại sản phẩm--</option>
                     <% dataLsp.forEach((data) => { %>
-                        <option value="<%= data.ID + ',' + data.showw %>"><%= data.TypeOfProduct %></option>
+                        <option value="<%= data.ID + ',' + data.showw %>"><%= data.LoaiSanPham %></option>
                     <% }) %>
                 </select>
             </div>
             
-            <label for=""><b>Image: </b></label>
+            <label for=""><b>Ảnh: </b></label>
             <input class="input" type="file" name="fileImage" accept="image/*" required>
             <!-- <input type="text" hidden name="fileImageText"> -->
             
-            <label for=""><b>Name: </b></label>
-            <input class="input" type="text" placeholder="Input name of product" name="ProductName" required>
+            <label for=""><b>Tên sản phẩm: </b></label>
+            <input class="input" type="text" placeholder="Nhập tên sản phẩm" name="tenSp" required>
             
-            <label for=""><b>Listed Price: </b></label>
-            <input class="input" type="number" placeholder="Input listed price" name="ListedPrice" oninput="this.value = Math.abs(this.value)" min="0" required>
+            <label for=""><b>Giá nhập: </b></label>
+            <input class="input" type="number" placeholder="Nhập giá nhập" name="giaNhap" oninput="this.value = Math.abs(this.value)" min="0" required>
             
-            <label for=""><b>Export Price: </b></label>
-            <input class="input" type="number" placeholder="Input export price" name="ExportPrice" oninput="this.value = Math.abs(this.value)" min="0" required>
+            <label for=""><b>Giá bán: </b></label>
+            <input class="input" type="number" placeholder="Nhập giá bán" name="giaBan" oninput="this.value = Math.abs(this.value)" min="0" required>
             
-            <label for=""><b>Quantity: </b></label>
-            <input class="input" type="number" placeholder="Input quantity" name="Quantity" oninput="this.value = Math.abs(this.value)" min="0" required>
+            <label for=""><b>Số lượng: </b></label>
+            <input class="input" type="number" placeholder="Nhập số lượng" name="soLuong" oninput="this.value = Math.abs(this.value)" min="0" required>
             
-            <label for=""><b>Origin: </b></label>
+            <label for=""><b>Xuất xứ: </b></label>
             <div class="custom-select-sp">
-                <select name="Origin" required>
-                    <option value="">-From-</option>
+                <select name="xuatXu" required>
+                    <option value="">-Chọn xuất xứ</option>
                     <% dataXx.forEach((data) => { %>
-                        <option value="<%= data.ID + ',' + data.showw %>"><%= data.Origin %></option>
+                        <option value="<%= data.ID + ',' + data.showw %>"><%= data.XuatXu %></option>
                     <% }) %>
                 </select>
             </div>
             
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Exit</button>
-                <button type="submit" class="CUDbtn">Submit</button>
+                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Thoát</button>
+                <button type="submit" class="CUDbtn">Thêm</button>
             </div>
         </div>
     </form>
@@ -288,55 +288,55 @@
     </form>
 </div> -->
 <% /* %><td  class="cog">
-    <button onclick="document.getElementById('del<%= data.ID %>').style.display='block'" style="width:auto;">Delete</button>
+    <button onclick="document.getElementById('del<%= data.ID %>').style.display='block'" style="width:auto;">Xóa</button>
     <div id="del<%= data.ID %>" class="modal">
         <span onclick="document.getElementById('del<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="/admin/Product/delete/<%= data.ID %>" method="post" enctype="multipart/form-data">
+        <form class="modal-content" action="/admin/san-pham/delete/<%= data.ID %>" method="post" enctype="multipart/form-data">
             <div class="container">
-                <h1 style="text-align:center;">Delete</h1>
+                <h1 style="text-align:center;">Xóa sản phẩm</h1>
                 <hr>
                 <table id="myTable_bottom" style="margin-bottom: 10px;">
                     <tr class="header_bottom">
-                        <th>No.</th>
+                        <th>STT</th>
                         <th>ID</th>
-                        <th>Type of Product</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Listed Price</th>
-                        <th>Export Price</th>
-                        <th>Quantity</th>
-                        <th>Added Date</th>
-                        <th>Modified Date</th>
-                        <th>Origin</th>
+                        <th>Loại sản phẩm</th>
+                        <th>Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá nhập</th>
+                        <th>Giá bán</th>
+                        <th>Số lượng</th>
+                        <th>Ngày thêm</th>
+                        <th>Ngày sửa</th>
+                        <th>Xuất xứ</th>
                     </tr>
                     <tr>
                         <td><%= SttSp %></td>
                         <td><%= data.ID %></td>
-                        <td><%= data.TypeOfProduct %></td>
+                        <td><%= data.LoaiSanPham %></td>
                         <td>
                             <img src="/admin/image/<%= data.imgName %>" alt="" style="max-width: 60px">
                             <input type="text" value="<%= data.imgName %>" name="imgName" hidden>
                         </td>
-                        <td><%= data.ProductName %></td>
-                        <td><%= data.Listed %></td>
-                        <td><%= data.ExportPrice %></td>
-                        <td><%= data.Quantity %></td>
+                        <td><%= data.TenSanPham %></td>
+                        <td><%= data.GiaNhap %></td>
+                        <td><%= data.GiaBan %></td>
+                        <td><%= data.SoLuong %></td>
                         <td>
-                            <% if(data.Date <10 ) { %> 0<%= data.Date %> <% } else { %> <%= data.Date %> <% } %> -
-                            <% if(data.Month <10 ) { %> 0<%= data.Month %> <% } else { %> <%= data.Month %> <% } %> -
-                            <%= data.Year %>
+                            <% if(data.Ngay <10 ) { %> 0<%= data.Ngay %> <% } else { %> <%= data.Ngay %> <% } %> -
+                            <% if(data.Thang <10 ) { %> 0<%= data.Thang %> <% } else { %> <%= data.Thang %> <% } %> -
+                            <%= data.Nam %>
                         </td>
                         <td>
-                            <% if(data.DateUp <10 ) { %> 0<%= data.DateUp %> <% } else { %> <%= data.DateUp %> <% } %> -
-                            <% if(data.MonthUp <10 ) { %> 0<%= data.MonthUp %> <% } else { %> <%= data.MonthUp %> <% } %> -
-                            <%= data.YearUp %>
+                            <% if(data.NgayUp <10 ) { %> 0<%= data.NgayUp %> <% } else { %> <%= data.NgayUp %> <% } %> -
+                            <% if(data.ThangUp <10 ) { %> 0<%= data.ThangUp %> <% } else { %> <%= data.ThangUp %> <% } %> -
+                            <%= data.NamUp %>
                         </td>
-                        <td><%= data.Origin %></td>
+                        <td><%= data.XuatXu %></td>
                     </tr>
                 </table>
                 <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('del<%= data.ID %>').style.display='none'" class="cancelbtn">Exit</button>
-                    <button type="submit" class="CUDbtn">Delete</button>
+                    <button type="button" onclick="document.getElementById('del<%= data.ID %>').style.display='none'" class="cancelbtn">Thoát</button>
+                    <button type="submit" class="CUDbtn">Xóa</button>
                 </div>
                 
             </div>

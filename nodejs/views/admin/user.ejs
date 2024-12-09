@@ -1,0 +1,28 @@
+<h2>Tài khoản khách hàng</h2>
+<div style="text-align: center;">
+    <input type="text" id="myInput" onkeyup="search_table()" placeholder="Tìm kiếm tên tài khoản ..." title="Type in a name">
+</div>
+<table id="myTable">
+    <tr class="header">
+        <th>ID</th>
+        <th>Tên tài khoản</th>
+        <th>Trạng thái</th>
+        <th>Ngày đăng ký</th>
+        <th>Các hóa đơn</th>
+        <th>Thao tác</th>
+    </tr>
+    <% dataUser.forEach((data) => { %>
+    <tr>
+        <td><%= data.ID %></td>
+        <td><%= data.TenTK %></td>
+        <td><%= data.TrangThai %></td>
+        <td><%= data.NgayDK %></td>
+        <td><a href="/admin/user/san-pham-da-mua/<%= data.ID %>">Xem</a></td>
+        <% if (data.TrangThai == 0) { %>
+        <td><a href="/admin/user/unlock/<%= data.ID %>">Mở tài khoản</a></td>
+        <% }else { %>
+        <td><a href="/admin/user/lockup/<%= data.ID %>">Khóa tài khoản</a></td>
+        <% } %>
+    </tr>
+    <% }) %>
+</table>

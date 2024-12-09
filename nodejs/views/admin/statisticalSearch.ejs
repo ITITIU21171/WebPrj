@@ -1,0 +1,85 @@
+<div>
+    <h1>Thống kê</h1>
+    <form action="/admin/thong-ke/search" style="text-align: center;margin-bottom: 12px;" method="get">
+        <a href="/admin/thong-ke"><input type="button" value="Hôm nay"></a>
+        Từ: <input type="date" value="" id="dateToday_start" onclick="todayMax()" name="dateStart">
+        Đến: <input type="date" id="dateToday_end" onclick="todayMin()" name="dateEnd">
+        <input type="submit" value="Thống kê">
+    </form>
+    <div id="piechart" style="text-align: -webkit-center;"></div>
+    <div>
+      <table id="myTable" >
+          <tr class="header">
+              <th>STT</th>
+              <th>Tên sản phẩm</th>
+              <th>Đơn giá</th>
+              <th>Số lượng</th>
+              <th>Thành tiền</th>
+          </tr> 
+          <% tong = 0; dataStatis.forEach(function(data) { tong += data.ThanhTien%>
+              <tr>
+                  <td><%= Stt += 1 %></td>
+                  <td><%= data.TenSanPham %></td>
+                  <td><%= data.GiaBan %></td>
+                  <td><%= data.SoLuong %></td>
+                  <td><%= data.ThanhTien %></td>
+              </tr>
+          <% }) %>
+          <tr>
+              <td colspan="4" style="text-align: right;">Tổng:</td>
+              <td><%= tong %></td>
+          </tr>
+      </table> 
+  </div>
+</div>
+  
+  <% if (!dataStatis[0]) { %>
+    <p style="text-align: center;">Không có dữ liệu</p>
+    <script type="text/javascript">
+      dateToday_start.max = new Date().toLocaleDateString('en-ca');
+      dateToday_end.max = new Date().toLocaleDateString('en-ca');
+      document.getElementById('dateToday_start').valueAsDate = new Date();
+      document.getElementById('dateToday_end').valueAsDate = new Date();
+      function todayMin() {
+          dateToday_end.min = document.getElementById('dateToday_start').value;
+      }
+      function todayMax() {
+          dateToday_start.max = document.getElementById('dateToday_end').value;
+      }
+    </script>
+  <% } else { %>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- <script type="text/javascript" src="/admin/js/home.js"></script> -->
+  <script type="text/javascript">
+    dateToday_start.max = new Date().toLocaleDateString('en-ca');
+    dateToday_end.max = new Date().toLocaleDateString('en-ca');
+    document.getElementById('dateToday_start').valueAsDate = new Date();
+    document.getElementById('dateToday_end').valueAsDate = new Date();
+    function todayMin() {
+        dateToday_end.min = document.getElementById('dateToday_start').value;
+    }
+    function todayMax() {
+        dateToday_start.max = document.getElementById('dateToday_end').value;
+    }
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['ThongKe', 'Trong ngay'],
+        // console.log(dataStatis)
+        // ['Work', '8'],
+        // ['Eat', '2'],
+        // ['TV', '4'],
+        // ['Gym', '2'],
+        // ['Sleep', '8'],
+        <% dataStatis.forEach(function(data) { %>
+          ['<%= data.TenSanPham %>', <%= data.SoLuong %>],
+        <% }) %>
+      ]);
+  
+      var options = { 'title': 'Thống kê từ: <%= dateStart %> đến: <%= dateEnd %>', 'width': 950, 'height': 550 , 'margin-right': 0};
+  
+      var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+  </script> <% } %>

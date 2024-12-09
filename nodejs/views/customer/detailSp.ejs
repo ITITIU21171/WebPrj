@@ -1,0 +1,74 @@
+<% if(!dataDetailSp[0]) { %>
+    <p style="text-align: center;">Không có sản phẩm nào</p>
+<% } else { %>
+    <div class="container" style="background: white;">
+        <div class="Tieu_de" style="margin-top: 10px;">
+            <div>
+                Chi tiết sản phẩm: <%= dataDetailSp[0].TenSanPham %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5" style="display: flex;justify-content: center;align-items: center;margin-bottom: 10px;">
+                <img src="/admin/image/<%= dataDetailSp[0].imgName %>" alt="" id="img_main" style="box-shadow: 0px 0px 5px 0px;border-radius: 5%; max-height: 245px;">
+                <div class="row" style="margin-top: 5px;">
+                </div>
+            </div>
+            <style>
+                input:focus-visible {
+                    outline: none;
+                    border: none;
+                }
+
+                input {
+                    border: none;
+                }
+            </style>
+            <div class="col-md-7">
+                <form action="/customer/san-pham/add-to-cart" method="post">
+                    <h3 style="padding-bottom: 5px;"><input type="text" name="TenSP" value="<%= dataDetailSp[0].TenSanPham %>" readonly></h3>
+                    <p>Giá: <input type="text" name="DonGia" value="<%= dataDetailSp[0].GiaBan %>" readonly style="text-align: right;">/kg </p>
+                    <p>Xuất xứ: <input type="text" name="XuatXu" value="<%= dataDetailSp[0].XuatXu %>" readonly> </p>
+                    <p>Số lượng hiện có: <input type="text" name="SoLuongCo" value="<%= dataDetailSp[0].SoLuong %>" readonly style="text-align: right;">kg</p>
+                    <p>Số lượng mua: <input type="number" name="SoLuongMua" min="1" max="<%= dataDetailSp[0].SoLuong %>" oninput="this.value = Math.abs(this.value)" required></p>
+                    <input type="text" name="idLsp" value="<%= dataDetailSp[0].ID_LoaiSanPham %>" hidden>
+                    <input type="text" name="idSp" value="<%= dataDetailSp[0].ID %>" hidden>
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ hàng</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background: white;">
+        <div class="Tieu_de" style="margin-top: 10px;">
+            <div>
+                Sản phẩm cùng loại
+            </div>
+        </div>
+        <% if(!dataSameSp[0]) { %>
+            <p style="text-align: center;">Chưa có sản phẩm cùng loại</p>
+        <% } else { %>
+        <div class="row">
+            <% dem = 1; dataSameSp.forEach((data) => {
+                if(dem <= 6 ){ %>
+                    <div class="col-sm-2"><a href="/customer/san-pham/chi-tiet/<%= data.ID_LoaiSanPham %>/<%= data.ID %>" style="color: black;">
+                        <div class="card" style="width: 10rem;">
+                        <img src="/admin/image/<%= data.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 250px">
+                        <div class="card-body">
+                            Tên: <%= data.TenSanPham %><br>
+                            Xuất xứ: <%= data.XuatXu %><br>
+                            Giá bán: <%= data.GiaBan %>/kg<br>
+                            Số lượng:  <%= data.SoLuong %>kg
+                        </div>
+                        </div></a>
+                    </div>
+                <%  dem += 1
+                }
+            }) %>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin: 10px 0px;">
+            <button class="btn btn-primary me-md-2" type="button" style="background: #00e85d;border-color: #00e85d;"><a href="/customer/san-pham/loai-san-pham/<%= dataSameSp[0].ID_LoaiSanPham %>">Xem tất cả <i class="fa fa-arrow-right" aria-hidden="true"></i></a></button>
+        </div>
+        <% } %>
+    </div>
+<% } %>

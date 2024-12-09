@@ -1,23 +1,23 @@
 <div class="container">
-    <% if(!dataProducts[0]) { %>
-        <p style="text-align: center;">No products found</p>
+    <% if(!dataSp[0]) { %>
+        <p style="text-align: center;">Không có sản phẩm cần tìm</p>
     <% } else { %>
-    <div class="Title" style="margin-top: 10px;">
+    <div class="Tieu_de" style="margin-top: 10px;">
         <div>
-            Search: <%= title %>
+            Tìm kiếm: <%= title %>
         </div>
     </div>
     <div class="row">
-        <% dataProducts.forEach((product) => {
+        <% dataSp.forEach((datasp) => {
             %>
-                <div class="col-sm-3"><a href="/customer/product/details/<%= product.CategoryID %>/<%= product.ID %>" style="color: black;">
+                <div class="col-sm-3"><a href="/customer/san-pham/chi-tiet/<%= datasp.ID_LoaiSanPham %>/<%= datasp.ID %>" style="color: black;">
                     <div class="card" style="width: 18rem;">
-                    <img src="/admin/image/<%= product.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
+                    <img src="/admin/image/<%= datasp.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
                     <div class="card-body">
-                        Name: <%= product.ProductName %><br>
-                        Origin: <%= product.Origin %><br>
-                        Price: <%= product.UnitPrice %>/kg<br>
-                        Quantity:  <%= product.Quantity %>kg
+                        Tên: <%= datasp.TenSanPham %><br>
+                        Xuất xứ: <%= datasp.XuatXu %><br>
+                        Giá bán: <%= datasp.GiaBan %>/kg<br>
+                        Số lượng:  <%= datasp.SoLuong %>kg
                     </div>
                     </div></a>
                 </div>

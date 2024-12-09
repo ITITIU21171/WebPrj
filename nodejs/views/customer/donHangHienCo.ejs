@@ -1,0 +1,45 @@
+<div class="container" style="background: white;">
+    <div class="Tieu_de" style="margin-top: 10px;">
+        <div>
+            Đơn hàng hiện có
+        </div>
+    </div>
+
+    <h3>Thông tin đơn hàng</h3>
+    <table class="table table-striped">
+        <thead>
+            <td>STT</td>
+            <td>Tên người nhận</td>
+            <td>Địa chỉ</td>
+            <td>SĐT</td>
+            <td>Tổng tiền</td>
+            <td>Ngày mua</td>
+            <td>Ghi chú</td>
+            <td>Trạng thái</td>
+            <td colspan="2">Thao tác</td>
+        </thead>
+        <% if(!dataDonHang[0]) { %>
+            <tr>
+                <td colspan="9" style="text-align: center;">Chưa có đơn hàng !!!</td>
+            </tr>
+        <% } else { 
+            dem = 0;
+            dataDonHang.forEach((data) => { %>
+                <tr>
+                    <td><%= dem += 1 %></td>
+                    <td><%= data.TenKH %></td>
+                    <td><%= data.DiaChi %></td>
+                    <td><%= data.SDT %></td>
+                    <td><%= data.TongTien %> <sup>vnđ</sup></td>
+                    <td><%= data.NgayMua %></td>
+                    <td><%= data.GhiChu %></td>
+                    <td><%= data.TenTT %></td>
+                    <td><a href="/customer/don-hang/chi-tiet/<%= data.ID %>" style="color: blue;">Chi tiết</a></td>
+                    <td><a href="/customer/don-hang/huy/<%= data.ID %>" style="color: blue;">Hủy đơn hàng</a></td>
+                </tr>
+            <% })
+        } %>
+            
+                
+    </table>
+</div>

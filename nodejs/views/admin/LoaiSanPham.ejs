@@ -1,0 +1,195 @@
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: #474e5d;
+        padding-top: 50px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    .inputLsp {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    .inputLsp:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    .clearfix{
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+<h2>Quản lý loại sản phẩm</h2>
+<div style="text-align: center;">
+    <input type="text" id="myInput" onkeyup="search_table_lsp()" placeholder="Search for names.."
+        title="Type in a name">
+    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Thêm sản phẩm</button>
+</div>
+
+<table id="myTable">
+    <tr class="header">
+        <th>STT</th>
+        <th>ID</th>
+        <th>Tên loại sản phẩm</th>
+        <th>Ngày thêm</th>
+        <th>Ngày cập nhật</th>
+        <th>Hiện trên web</th>
+        <th colspan="2" class="cog"><i class="fa fa-cog" aria-hidden="true"></i></th>
+    </tr>
+    <% dataLsp.forEach((data)=>{ %>
+        <tr>
+            <td>
+                <%= SttLsp +=1 %>
+            </td>
+            <td>
+                <%= data.ID %>
+            </td>
+            <td>
+                <%= data.Ten %>
+            </td>
+            <td>
+                <%= data.NgayThem %>
+            </td>
+            <td>
+                <%= data.update_at %>
+            </td>
+            <% if (data.showw == 0) { %>
+            <td style="color: #fe7c21;">Không</td>
+            <% }else { %>
+            <td style="color: #8acf18;">Có</td>
+            <% } %>
+            <td  class="cog">
+                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Sửa</button>
+                <div id="update<%= data.ID %>" class="modal">
+                    <span onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <form class="modal-content" action="/admin/loai-san-pham/update/<%= data.ID %>" method="post">
+                        <div class="container">
+                            <h1 style="text-align:center;">Sửa loại sản phẩm</h1>
+                            <hr>
+                            <label for=""><b>Tên loại sản phẩm: </b></label>
+                            <input class="inputLsp" type="text" placeholder="Nhập tên loại sản phẩm" name="nameLsp" value="<%= data.Ten %>" required>
+                            <div class="clearfix">
+                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Thoát</button>
+                                <button type="submit" class="CUDbtn">Sửa</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </td>
+            <% if (data.showw == 0) { %>
+            <td><button><a style="color: #8acf18;" href="/admin/loai-san-pham/show/<%= data.ID %>">Hiện</a></button></td>
+            <% }else { %>
+            <td><button><a style="color: #fe7c21;" href="/admin/loai-san-pham/hidden/<%= data.ID %>">Ẩn</a></button></td>
+            <% } %>
+        </tr>
+        <% }) %>
+</table>
+
+<div id="create" class="modal">
+    <span onclick="document.getElementById('create').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" action="/admin/loai-san-pham/create" method="post">
+        <div class="container">
+            <h1 style="text-align:center;">Thêm loại sản phẩm</h1>
+            <hr>
+            <label for=""><b>Tên loại sản phẩm: </b></label>
+            <input class="inputLsp" type="text" placeholder="Nhập tên loại sản phẩm" name="nameLsp" required>
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Thoát</button>
+                <button type="submit" class="CUDbtn">Thêm</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- <div id="del" class="modal">
+    <span onclick="document.getElementById('del').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" action="/admin/loai-san-pham/delete" method="post">
+        <div class="container">
+            <h1 style="text-align:center;">Thêm sản phẩm</h1>
+            <hr>
+            <label for=""><b>Tên loại sản phẩm: </b></label>
+            <input class="inputLsp" type="text" placeholder="Nhập tên loại sản phẩm" name="nameLsp" required>
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('del').style.display='none'" class="cancelbtn">Thoát</button>
+                <button type="submit" class="CUDbtn">Thêm</button>
+            </div>
+        </div>
+    </form>
+</div> -->
+
+<script>
+    // var create = document.getElementById('create');
+    // var update4 = document.getElementById('update4');
+    // var del = document.getElementById('delete');
+
+    // window.onclick = function (event) {
+    //     if (event.target == create) {
+    //         create.style.display = "none";
+    //     }
+    //     if (event.target == update4) {
+    //         update4.style.display = "none";
+    //     }
+    //     if (event.target == del) {
+    //         del.style.display = "none";
+    //     }
+    // }
+</script>
