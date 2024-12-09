@@ -1,10 +1,10 @@
 <div class="container">
     <% if(!dataSp[0]) { %>
-        <p style="text-align: center;">Không có sản phẩm cần tìm</p>
+        <p style="text-align: center;">There are no products to search for.</p>
     <% } else { %>
     <div class="Tieu_de" style="margin-top: 10px;">
         <div>
-            Tìm kiếm: <%= title %>
+            Search: <%= title %>
         </div>
     </div>
     <div class="row">
@@ -14,10 +14,10 @@
                     <div class="card" style="width: 18rem;">
                     <img src="/admin/image/<%= datasp.imgName %>" class="card-img-top" id="NgoaiNhap1" alt="..." style="max-height: 450px">
                     <div class="card-body">
-                        Tên: <%= datasp.TenSanPham %><br>
-                        Xuất xứ: <%= datasp.XuatXu %><br>
-                        Giá bán: <%= datasp.GiaBan %>/kg<br>
-                        Số lượng:  <%= datasp.SoLuong %>kg
+                        Name: <%= datasp.TenSanPham %><br>
+                        Origin: <%= datasp.XuatXu %><br>
+                        Price: <%= datasp.GiaBan %>/kg<br>
+                        Quantity:  <%= datasp.SoLuong %>kg
                     </div>
                     </div></a>
                 </div>

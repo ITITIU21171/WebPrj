@@ -6,15 +6,15 @@
         <li>
             <form class="d-flex" style="margin-top: 11%;" method="post" action="/customer/san-pham/search">
                 <input class="form-control me-2" type="search" placeholder="Tìm kiếm ..." aria-label="Search" name="search">
-                <button class="btn btn-outline-success" type="submit" style="color: white">Tìm kiếm</button>
+                <button class="btn btn-outline-success" type="submit" style="color: white">Search</button>
             </form>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/customer/home">Trang chủ</a>
+            <a class="nav-link active" aria-current="page" href="/customer/home">Home</a>
         </li>
         <li class="nav-item dropdown" id="dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sản phẩm
+                Products
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% dataHeaderSp.forEach((data) => { 
@@ -27,7 +27,7 @@
         </li>
         <li class="nav-item dropdown" id="dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Xuất xứ
+                Origin
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <% dataHeaderXx.forEach((data) => { 
@@ -40,10 +40,10 @@
         </li>
         <% if(!sessionID) { %>
             <li class="nav-item">
-                <button type="button" class="btn btn-success"><a href="/customer/login">Đăng nhập</a></button>
+                <button type="button" class="btn btn-success"><a href="/customer/login">Sign In</a></button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-danger"><a href="/customer/signup">Đăng ký</a></button>
+                <button type="button" class="btn btn-danger"><a href="/customer/signup">Sign Up</a></button>
             </li>
         <% } else { %>
             <li class="nav-item dropdown" id="dropdown">
@@ -51,11 +51,11 @@
                 Tài khoản: <%= sessionID.TenTK %>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/customer/changePass">Đổi mật khẩu</a></li>
-                <li><a class="dropdown-item" href="/customer/cart">Giỏ hàng</a></li>
-                <li><a class="dropdown-item" href="/customer/don-hang">Đơn hàng hiện có</a></li>
-                <li><a class="dropdown-item" href="/customer/don-hang/lich-su">Lịch sử đặt hàng</a></li>
-                <li><a class="dropdown-item" href="/customer/login">Đăng xuất</a></li>
+                <li><a class="dropdown-item" href="/customer/changePass">Change Password</a></li>
+                <li><a class="dropdown-item" href="/customer/cart">Cart</a></li>
+                <li><a class="dropdown-item" href="/customer/don-hang">Existing orders</a></li>
+                <li><a class="dropdown-item" href="/customer/don-hang/lich-su">Order history</a></li>
+                <li><a class="dropdown-item" href="/customer/login">Log Out</a></li>
                 </ul>
             </li>
         <% } %>
