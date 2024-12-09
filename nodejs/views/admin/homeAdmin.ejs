@@ -1,0 +1,40 @@
+<div>
+    <h1>Main</h1>
+    <div id="piechart" style="text-align: -webkit-center;"></div>
+  </div>
+  
+  <% if (!dataHome[0]) { %>
+    <p style="text-align: center;">CAN'T FOUND DATA</p>
+  <% } else { %>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- <script type="text/javascript" src="/admin/js/home.js"></script> -->
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    // console.log('<%= dataHome[0].TenSanPham %>');
+    // '<% dataHome.forEach(function(data) { %>'
+    //       console.log(['<%= data.TenSanPham %>', '<%= data.SoLuong %>']);
+  
+    //     '<% }) %>'
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Statistic', 'Time'],
+        // console.log(dataHome)
+        // ['Work', '8'],
+        // ['Eat', '2'],
+        // ['TV', '4'],
+        // ['Gym', '2'],
+        // ['Sleep', '8'],
+        <% dataHome.forEach(function(data) { %>
+          ['<%= data.ProductName %>', <%= data.Quantity %>],
+        <% }) %>
+      ]);
+  
+      // Optional; add a title and set the width and height of the chart
+      var options = { 'title': 'Statistic', 'width': 950, 'height': 550 , 'margin-right': 0};
+  
+      // Display the chart inside the <div> element with id="piechart"
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+  </script> <% } %>

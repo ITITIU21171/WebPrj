@@ -1,0 +1,202 @@
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: #474e5d;
+        padding-top: 50px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    .input {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    .input:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    .clearfix{
+        display: flex;
+        justify-content: space-around;
+    }
+    .custom-select-sp select{
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        background-color: #f1f1f1;
+        border: none;
+        appearance: none;
+    }
+</style>
+<h2>Bills Management</h2>
+<div style="text-align: center;">
+    <input type="text" id="myInput" onkeyup="search_table_hd()" placeholder="Tìm kiếm ..." title="Type in a name">
+</div>
+<table id="myTable">
+    <tr class="header">
+        <th>No. </th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Total</th>
+        <th>Date Of Purchase</th>
+        <th>Note</th>
+        <th>Status</th>
+        <th colspan="3">Action</th>
+    </tr>
+    <% dataHd.forEach((data) => { %>
+    <tr>
+        <td><%= Stt +=1 %></td>
+        <td><%= data.IDTK %></td>
+        <td><%= data.CustomerName %></td>
+        <td><%= data.Address %></td>
+        <td><%= data.PhoneNumber %></td>
+        <td><%= data.Total %></td>
+        <td>
+            <%= data.DatePurchase %>
+        </td>
+        <td><%= data.Note %></td>
+        <td style="color: <% if(data.Status == 2){ %> #8acf18 <% } else if(data.Status == 3){ %> #fe7c21 <% } %>;">
+            <%= data.StatusName %>
+        </td>
+        <td>
+            <button onclick="document.getElementById('detail<%= data.ID %>').style.display='block'" style="width:auto;">More</button>
+            <div id="detail<%= data.ID %>" class="modal">
+                <span onclick="document.getElementById('detail<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <div class="modal-content">
+                    <div class="container">
+                        <h1 style="text-align:center;">Bills</h1>
+                        <table id="myTable_bottom" style="margin-bottom: 10px;">
+                            <tr class="header_bottom">
+                                <th>No.</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Phone Number</th>
+                                <th>Total</th>
+                                <th>Date Of Purchase</th>
+                                <th>Note</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td><%= Stt %></td>
+                                <td><%= data.IDTK %></td>
+                                <td><%= data.CustomerName %></td>
+                                <td><%= data.Address %></td>
+                                <td><%= data.PhoneNumber %></td>
+                                <td><%= data.Total %></td>
+                                <td>
+                                    <%= data.DatePurchase %>
+                                </td>
+                                <td><%= data.Note %></td>
+                                <td><%= data.StatusName %></td>
+                            </tr>
+                        </table>
+                        <hr>
+                        <h3 style="text-align:center;">More Details</h3>
+                        <table id="myTable_bottom" style="margin-bottom: 10px;">
+                            <tr class="header_bottom">
+                                <th>No. </th>
+                                <th>ID</th>
+                                <th>Products</th>
+                                <th>Picture</th>
+                                <th>Origin</th>
+                                <th>Cost</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                            <% dem = 0; dataCthd.forEach((datacthd) => { 
+                                if(data.ID == datacthd.ID_Bills) { %>
+                                <tr>
+                                    <td><%= dem += 1 %></td>
+                                    <td><%= datacthd.ProductID %></td>
+                                    <td><%= datacthd.ProductName %></td>
+                                    <td>
+                                        <img src="/admin/image/<%= datacthd.imgName %>" alt="" style="max-width: 60px">  
+                                    </td>
+                                    <td><%= datacthd.Origin %></td>
+                                    <td><%= datacthd.Cost %></td>
+                                    <td><%= datacthd.Quantity %></td>
+                                    <td><%= datacthd.Paid %></td>
+                                </tr>
+                               <% }
+                             }) %>
+                        </table>
+                        <div class="clearfix">
+                            <button type="button" onclick="document.getElementById('detail<%= data.ID %>').style.display='none'" class="cancelbtn">Close</button>
+                            <!-- <button type="submit" class="CUDbtn">Xóa</button> -->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </td>
+        <% if(data.Status == 2 || data.Status == 3){ %> 
+
+             <% } else { %> 
+                <td><a href="/admin/Bills/submit/<%= data.ID %>"><button>Received</button></a></td>
+        <td><a href="/admin/Bills/cancel/<%= data.ID %>"><button>Cancelled</button></a></td>
+                 <% } %>
+        
+    </tr>
+    <% }) %>
+</table>

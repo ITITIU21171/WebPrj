@@ -1,0 +1,115 @@
+<% if(dataDetail.length==0){ %>
+    <p style="text-align: center;">CAN'T FOUND DATA</p>
+    <% }else { %>
+        <table id="myTable_top" style="margin-top: 12px;">
+            <tr class="header_top">
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Sign up Date</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= dataDetail[0].IDTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].AccountName %>
+                </td>
+                <td>
+                    <%= dataDetail[0].Password %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TTTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].SignUpDate %>
+                </td>
+            </tr>
+        </table>
+
+        <table id="myTable_top" style="margin-top: 12px;">
+            <tr class="header_top">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Total</th>
+                <th>Ordered Date</th>
+                <th>Note</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= dataDetail[0].ID %>
+                </td>
+                <td>
+                    <%= dataDetail[0].CustomerName %>
+                </td>
+                <td>
+                    <%= dataDetail[0].Address %>
+                </td>
+                <td>
+                    <%= dataDetail[0].PhoneNumber %>
+                </td>
+                <td>
+                    <%= dataDetail[0].Total %>
+                </td>
+                <td>
+                    <%= dataDetail[0].OrderedDate %>
+                </td>
+                <td>
+                    <%= dataDetail[0].Note %>
+                </td>
+                <td>
+                    <%= dataDetail[0].StatusName %>
+                </td>
+            </tr>
+        </table>
+
+        <div style="text-align: center">
+            <input type="text" id="myInput" onkeyup="search_table_detail_receipt()" placeholder="Search for names.."
+                title="Type in a name">
+
+        </div>
+
+        <table id="myTable">
+            <tr class="header">
+                <th>No.</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Origin</th>
+                <th>Cost</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            <% dataDetail.forEach((data)=> { %>
+                <tr>
+                    <td>
+                        <%= No +=1 %>
+                    </td>
+                    <td>
+                        <%= data.ProductID %>
+                    </td>
+                    <td>
+                        <%= data.ProductName %>
+                    </td>
+                    <td>
+                        <%= data.Origin %>
+                    </td>
+                    <td>
+                        <%= data.Cost %>
+                    </td>
+                    <td>
+                        <%= data.Quantity %>
+                    </td>
+                    <td>
+                        <%= data.Total %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <% } %>
+            <div style="text-align: center;margin: 10px;">
+                <button><a href="/admin/user/Bought/<%= dataDetail[0].IDTK %>">Return</a></button>
+            </div>
