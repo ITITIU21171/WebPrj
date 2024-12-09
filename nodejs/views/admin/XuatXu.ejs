@@ -78,21 +78,21 @@
         justify-content: space-around;
     }
 </style>
-<h2>Quản lý xuất xứ sản phẩm</h2>
+<h2>Manage origin of product</h2>
 <div style="text-align: center;">
     <input type="text" id="myInput" onkeyup="search_table_xx()" placeholder="Search for names.."
         title="Type in a name">
-    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Thêm xuất xứ</button>
+    <button onclick="document.getElementById('create').style.display='block'" style="width:auto;">Add origin</button>
 </div>
 
 <table id="myTable">
     <tr class="header">
         <th>STT</th>
         <th>ID</th>
-        <th>Tên xuất xứ</th>
-        <th>Ngày thêm</th>
-        <th>Ngày cập nhật</th>
-        <th>Hiện trên web</th>
+        <th>Origin</th>
+        <th>Added Date</th>
+        <th>Updated Date</th>
+        <th>Available</th>
         <th colspan="2" class="cog"><i class="fa fa-cog" aria-hidden="true"></i></th>
     </tr>
     <% dataXx.forEach((data)=>{ %>
@@ -118,27 +118,27 @@
             <td style="color: #8acf18;">Có</td>
             <% } %>
             <td  class="cog">
-                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Sửa</button>
+                <button onclick="document.getElementById('update<%= data.ID %>').style.display='block'" style="width:auto;">Change</button>
                 <div id="update<%= data.ID %>" class="modal">
                     <span onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="close" title="Close Modal">&times;</span>
                     <form class="modal-content" action="/admin/xuat-xu-san-pham/update/<%= data.ID %>" method="post">
                         <div class="container">
-                            <h1 style="text-align:center;">Sửa xuất xứ</h1>
+                            <h1 style="text-align:center;">Change</h1>
                             <hr>
-                            <label for=""><b>Tên xuất xứ: </b></label>
-                            <input class="input" type="text" placeholder="Nhập tên xuất xứ" name="nameXx" value="<%= data.XuatXu %>" required>
+                            <label for=""><b>Origin: </b></label>
+                            <input class="input" type="text" placeholder="Input origin" name="nameXx" value="<%= data.XuatXu %>" required>
                             <div class="clearfix">
-                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Thoát</button>
-                                <button type="submit" class="CUDbtn">Sửa</button>
+                                <button type="button" onclick="document.getElementById('update<%= data.ID %>').style.display='none'" class="cancelbtn">Exit</button>
+                                <button type="submit" class="CUDbtn">Change</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </td>
             <% if (data.showw == 0) { %>
-            <td><button><a style="color: #8acf18;" href="/admin/xuat-xu-san-pham/show/<%= data.ID %>">Hiện</a></button></td>
+            <td><button><a style="color: #8acf18;" href="/admin/xuat-xu-san-pham/show/<%= data.ID %>">Show</a></button></td>
             <% }else { %>
-            <td><button><a style="color: #fe7c21;" href="/admin/xuat-xu-san-pham/hidden/<%= data.ID %>">Ẩn</a></button></td>
+            <td><button><a style="color: #fe7c21;" href="/admin/xuat-xu-san-pham/hidden/<%= data.ID %>">Hide</a></button></td>
             <% } %>
         </tr>
         <% }) %>
@@ -148,13 +148,13 @@
     <span onclick="document.getElementById('create').style.display='none'" class="close" title="Close Modal">&times;</span>
     <form class="modal-content" action="/admin/xuat-xu-san-pham/create" method="post">
         <div class="container">
-            <h1 style="text-align:center;">Thêm xuất xứ</h1>
+            <h1 style="text-align:center;">Add origin</h1>
             <hr>
-            <label for=""><b>Tên xuất xứ: </b></label>
-            <input class="input" type="text" placeholder="Nhập tên xuất xứ" name="nameXx" required>
+            <label for=""><b>Origin: </b></label>
+            <input class="input" type="text" placeholder="Input origin" name="nameXx" required>
             <div class="clearfix">
-                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Thoát</button>
-                <button type="submit" class="CUDbtn">Thêm</button>
+                <button type="button" onclick="document.getElementById('create').style.display='none'" class="cancelbtn">Exit</button>
+                <button type="submit" class="CUDbtn">Add</button>
             </div>
         </div>
     </form>

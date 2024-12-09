@@ -1,19 +1,19 @@
 <div>
-    <h1>Thống kê</h1>
+    <h1>Statistical</h1>
     <form action="/admin/thong-ke/search" style="text-align: center;margin-bottom: 12px;">
-        Từ: <input type="date" value="" id="dateToday_start" onclick="todayMax()" name="dateStart">
-        Đến: <input type="date" id="dateToday_end" onclick="todayMin()" name="dateEnd">
+        From: <input type="date" value="" id="dateToday_start" onclick="todayMax()" name="dateStart">
+        To: <input type="date" id="dateToday_end" onclick="todayMin()" name="dateEnd">
         <input type="submit" value="Thống kê">
     </form>
     <div id="piechart" style="text-align: -webkit-center;"></div>
     <div>
         <table id="myTable" >
             <tr class="header">
-                <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Đơn giá</th>
-                <th>Số lượng</th>
-                <th>Thành tiền</th>
+                <th>No.</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
             </tr> 
             <% tong = 0; dataStatis.forEach(function(data) { tong += data.ThanhTien%>
                 <tr>
@@ -25,7 +25,7 @@
                 </tr>
             <% }) %>
             <tr>
-                <td colspan="4" style="text-align: right;">Tổng:</td>
+                <td colspan="4" style="text-align: right;">Total</td>
                 <td><%= tong %></td>
             </tr>
         </table> 
@@ -33,7 +33,7 @@
   </div>
   
   <% if (!dataStatis[0]) { %>
-    <p style="text-align: center;">Không có dữ liệu</p>
+    <p style="text-align: center;">NO DATA</p>
     <script type="text/javascript">
       dateToday_start.max = new Date().toLocaleDateString('en-ca');
       dateToday_end.max = new Date().toLocaleDateString('en-ca');

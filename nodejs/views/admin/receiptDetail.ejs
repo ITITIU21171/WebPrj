@@ -1,13 +1,13 @@
 <% if(dataDetail.length==0){ %>
-    <p style="text-align: center;">Không có dữ liệu</p>
+    <p style="text-align: center;">NO DATA</p>
     <% }else { %>
         <table id="myTable_top" style="margin-top: 12px;">
             <tr class="header_top">
                 <th>ID</th>
-                <th>Tên tài khoản</th>
-                <th>Mật khẩu</th>
-                <th>Trạng thái</th>
-                <th>Ngày đăng ký</th>
+                <th>Account</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Sign Up Date</th>
             </tr>
             <tr>
                 <td>
@@ -30,14 +30,14 @@
 
         <table id="myTable_top" style="margin-top: 12px;">
             <tr class="header_top">
-                <th>ID Hóa đơn</th>
-                <th>Tên khách hàng</th>
-                <th>Địa chỉ</th>
-                <th>SĐT</th>
-                <th>Tổng tiền</th>
-                <th>Ngày mua</th>
-                <th>Ghi chú</th>
-                <th>Trạng thái</th>
+                <th>Bill's ID</th>
+                <th>Customer's Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Total</th>
+                <th>Purchased Date</th>
+                <th>Note</th>
+                <th>Status</th>
             </tr>
             <tr>
                 <td>
@@ -75,13 +75,13 @@
 
         <table id="myTable">
             <tr class="header">
-                <th>STT</th>
-                <th>ID Sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Xuất xứ</th>
-                <th>Đơn giá</th>
-                <th>Số lượng</th>
-                <th>Thành tiền</th>
+                <th>No.</th>
+                <th>Product's ID</th>
+                <th>Product</th>
+                <th>Origin</th>
+                <th>Cost</th>
+                <th>Quantity</th>
+                <th>Total</th>
             </tr>
             <% dataDetail.forEach((data)=> { %>
                 <tr>
@@ -111,5 +111,5 @@
         </table>
         <% } %>
             <div style="text-align: center;margin: 10px;">
-                <button><a href="/admin/user/san-pham-da-mua/<%= dataDetail[0].IDTK %>">Trở về</a></button>
+                <button><a href="/admin/user/san-pham-da-mua/<%= dataDetail[0].IDTK %>">Back</a></button>
             </div>

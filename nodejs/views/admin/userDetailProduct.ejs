@@ -1,12 +1,12 @@
 <% if(dataDetail.length==0) { %>
-    <p style="text-align: center;">Không có dữ liệu</p>
+    <p style="text-align: center;">NO DATA</p>
     <% } else { %>
         <table id="myTable_top" style="margin-top: 12px;">
             <tr class="header_top">
                 <th>ID</th>
-                <th>Tên tài khoản</th>
-                <th>Trạng thái</th>
-                <th>Ngày đăng ký</th>
+                <th>Account</th>
+                <th>Status</th>
+                <th>Sign up Date</th>
             </tr>
             <tr>
                 <td>
@@ -25,7 +25,7 @@
         </table>
 
         <div style="text-align: center">
-            <input type="text" id="myInput" onkeyup="search_table_detail_user()" placeholder="Tìm kiếm tên, sdt, tiền"
+            <input type="text" id="myInput" onkeyup="search_table_detail_user()" placeholder="Finding..."
                 title="Type in a name">
 
         </div>
@@ -33,14 +33,14 @@
         <table id="myTable">
             <tr class="header">
                 <th>ID</th>
-                <th>Tên khách hàng</th>
-                <th>Địa chỉ</th>
-                <th>SĐT</th>
-                <th>Tổng tiền</th>
-                <th>Ngày mua</th>
-                <th>Ghi chú</th>
-                <th>Trạng thái</th>
-                <th>Chi tiết</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Total</th>
+                <th>Purchased Date</th>
+                <th>Note</th>
+                <th>Status</th>
+                <th>More details</th>
             </tr>
             <% dataDetail.forEach((data)=> { %>
                 <tr>
@@ -69,11 +69,11 @@
                         style="color: <% if(data.TrangThai == 2){ %> #8acf18 <% } else if(data.TrangThai == 3){ %> #fe7c21 <% } %>;">
                         <%= data.TenTT %>
                     </td>
-                    <td><a href="/admin/receipt-detail/<%= data.ID %>">Xem</a></td>
+                    <td><a href="/admin/receipt-detail/<%= data.ID %>">View</a></td>
                 </tr>
                 <% }) %>
         </table>
         <% } %>
             <div style="text-align: center;margin: 10px;">
-                <button><a href="/admin/user">Trở về</a></button>
+                <button><a href="/admin/user">Back</a></button>
             </div>

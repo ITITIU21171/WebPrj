@@ -5,11 +5,11 @@
 <table id="myTable">
     <tr class="header">
         <th>ID</th>
-        <th>Tên tài khoản</th>
-        <th>Trạng thái</th>
-        <th>Ngày đăng ký</th>
-        <th>Các hóa đơn</th>
-        <th>Thao tác</th>
+        <th>Account Name</th>
+        <th>Status</th>
+        <th>Sign up Date</th>
+        <th>Bills</th>
+        <th>Actions</th>
     </tr>
     <% dataUser.forEach((data) => { %>
     <tr>
@@ -17,11 +17,11 @@
         <td><%= data.TenTK %></td>
         <td><%= data.TrangThai %></td>
         <td><%= data.NgayDK %></td>
-        <td><a href="/admin/user/san-pham-da-mua/<%= data.ID %>">Xem</a></td>
+        <td><a href="/admin/user/san-pham-da-mua/<%= data.ID %>">View</a></td>
         <% if (data.TrangThai == 0) { %>
-        <td><a href="/admin/user/unlock/<%= data.ID %>">Mở tài khoản</a></td>
+        <td><a href="/admin/user/unlock/<%= data.ID %>">Open Account</a></td>
         <% }else { %>
-        <td><a href="/admin/user/lockup/<%= data.ID %>">Khóa tài khoản</a></td>
+        <td><a href="/admin/user/lockup/<%= data.ID %>">Lock Account</a></td>
         <% } %>
     </tr>
     <% }) %>
