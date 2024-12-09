@@ -1,24 +1,24 @@
 <div class="container" style="background: white;">
     <div class="Tieu_de" style="margin-top: 10px;">
         <div>
-            Giỏ hàng
+            Cart
         </div>
     </div>
 
-    <h3>Thông tin giỏ hàng</h3>
+    <h3>Shopping Cart Information</h3>
     <table class="table table-striped">
         <thead>
-            <td>STT</td>
-            <td>Tên</td>
-            <td>Xuất xứ</td>
-            <td>Đơn giá/kg</td>
-            <td>Số lượng</td>
-            <td>Thành tiền</td>
-            <td>Xóa</td>
+            <td>No.</td>
+            <td>Name</td>
+            <td>Origin</td>
+            <td>Price/kg</td>
+            <td>Quantity</td>
+            <td>Total</td>
+            <td>Delete</td>
         </thead>
         <% if(!dataCart[0]) { %>
             <tr>
-                <td colspan="7" style="text-align: center;">Chưa có gì trong giỏ hàng !!!</td>
+                <td colspan="7" style="text-align: center;">No items in the cart yet!!!</td>
             </tr>
         <% } else { 
                 dem = 0;
@@ -28,22 +28,22 @@
                         <td><%= dem += 1 %></td>
                         <td><%= data.TenSanPham %></td>
                         <td><%= data.XuatXu %></td>
-                        <td><%= number_format(data.DonGia) %> <sup>vnđ</sup></td>
+                        <td><%= number_format(data.DonGia) %> <sup>VND</sup></td>
                         <td>
                             <form action="/customer/cart/update" method="post">
                                 <input class="input_table" type="number" name="SoLuong" value="<%= data.SoLuong %>" min="1" max="<%= data.SoLuongSpTrongKho + data.SoLuong %>" oninput="this.value = Math.abs(this.value)" required>
                                 <input type="number" hidden name="SoLuongBanDau" value="<%= data.SoLuong %>">
                                 <input type="number" hidden name="idSanPham" value="<%= data.IDSanPham %>">
-                                <input type="submit" value="Cập nhật">
+                                <input type="submit" value="Update">
                             </form>
                         </td>
-                        <td><%= number_format(data.ThanhTien) %> <sup>vnđ</sup></td>
+                        <td><%= number_format(data.ThanhTien) %> <sup>VND</sup></td>
                         <td>
                             <form action="/customer/cart/delete" method="post">
                                 <input type="text" hidden name="idCart" value="<%= data.ID %>">
                                 <input type="text" hidden name="idSp" value="<%= data.IDSanPham %>">
                                 <input type="text" hidden name="SoLuong" value="<%= data.SoLuong %>">
-                                <input type="submit" value="Xóa">
+                                <input type="submit" value="Delete">
                             </form>
                         </td>
                     </tr>
@@ -76,48 +76,47 @@
         }
     </style>
         
-    <div style="margin-left: 2%;">
-        <h3>Thông tin khách hàng</h3>
-        <form action="/customer/cart/order" method="post" style="margin: auto;max-width: 50%;">
-            <div class="item_donhang">
-                <p>Họ và tên: <span>*</span></p><input class="input_cart" type="text" name="ho_ten" required>
-            </div>
-            <div class="item_donhang">
-                <p>Điện thoại: <span>*</span></p><input class="input_cart" type="tel" name="sdt" maxlength="10" pattern="[0-9]{10}" required>
-            </div>
-            <div class="item_donhang">
-                <p>Tỉnh/thành phố: <span>*</span></p><select class="" id="city" aria-label=".form-select-sm" name="tinhtp">
-                    <option value="" selected></option>
-                </select>
-            </div>
-            <div class="item_donhang">
-                <p>Quận huyện: <span>*</span></p><select class="" id="district" aria-label=".form-select-sm" name="quanhuyen">
-                    <option value="" selected></option>
-                </select>
-            </div>
-            <div class="item_donhang">
-                <p>Xã: <span>*</span></p><select class="" id="ward" aria-label=".form-select-sm" name="xa">
-                    <option value="" selected></option>
-                </select>
-            </div>
-            <div class="item_donhang">
-                <p>Địa chỉ cụ thể: </p><input class="input_cart" type="text" name="DiaChiCuThe">
-            </div>
-            <div class="item_donhang">
-                <p style="align-self: flex-start;">Ghi chú: </p><textarea name="ghi_chu" id="" cols="30" rows="10" maxlength="200" placeholder="Tối đa 200 ký tự"></textarea>
-            </div>
-            <% if(dataCart[0]) { %>
-                <input type="number" value="<%= tong %>" hidden name="tongThanhTien">
-            <% } else { %>
-                <input type="text" hidden required>
-            <% } %>
-            <div style="margin-bottom: 10px; margin-left: 10%;">
-                <button type="button" class="btn btn-success"><a href="/customer/home" style="text-decoration: none;">Tiếp tục mua hàng</a></button>
-                <button class="btn btn-danger" type="submit">Đặt hàng</button>
-            </div>
-        </form>
-    </div>
-</div>
+        <div style="margin-left: 2%;">
+            <h3>Customer Information</h3>
+            <form action="/customer/cart/order" method="post" style="margin: auto;max-width: 50%;">
+                <div class="item_donhang">
+                    <p>Full Name: <span>*</span></p><input class="input_cart" type="text" name="ho_ten" required>
+                </div>
+                <div class="item_donhang">
+                    <p>Phone: <span>*</span></p><input class="input_cart" type="tel" name="sdt" maxlength="10" pattern="[0-9]{10}" required>
+                </div>
+                <div class="item_donhang">
+                    <p>Province/City: <span>*</span></p><select class="" id="city" aria-label=".form-select-sm" name="tinhtp">
+                        <option value="" selected></option>
+                    </select>
+                </div>
+                <div class="item_donhang">
+                    <p>District/County: <span>*</span></p><select class="" id="district" aria-label=".form-select-sm" name="quanhuyen">
+                        <option value="" selected></option>
+                    </select>
+                </div>
+                <div class="item_donhang">
+                    <p>Ward: <span>*</span></p><select class="" id="ward" aria-label=".form-select-sm" name="xa">
+                        <option value="" selected></option>
+                    </select>
+                </div>
+                <div class="item_donhang">
+                    <p>Specific Address: </p><input class="input_cart" type="text" name="DiaChiCuThe">
+                </div>
+                <div class="item_donhang">
+                    <p style="align-self: flex-start;">Notes: </p><textarea name="ghi_chu" id="" cols="30" rows="10" maxlength="200" placeholder="Up to 200 characters"></textarea>
+                </div>
+                <% if(dataCart[0]) { %>
+                    <input type="number" value="<%= tong %>" hidden name="tongThanhTien">
+                <% } else { %>
+                    <input type="text" hidden required>
+                <% } %>
+                <div style="margin-bottom: 10px; margin-left: 10%;">
+                    <button type="button" class="btn btn-success"><a href="/customer/home" style="text-decoration: none;">Continue...</a></button>
+                </div>
+            </form>
+        </div>
+        
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="/customer/js/popper.min.js"></script>
