@@ -1,0 +1,29 @@
+.Tieu_de div {
+    line-height: 37px;
+    background: #61b000;
+    float: left;
+    padding: 0px 20px;
+    min-width: 170px;
+    position: relative;
+}
+
+.Tieu_de div::before {
+    position: absolute;
+    right: -37px;
+    top: 0px;
+    height: 0;
+    width: 0px;
+    content: '';
+    border-top: 37px solid transparent;
+    border-left: 37px solid #61B000;
+}
+
+.Tieu_de {
+    color: #fff;
+    font-size: 16px;
+    height: 37px;
+    line-height: 37px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #61B000;
+    margin-bottom: 5px;
+}

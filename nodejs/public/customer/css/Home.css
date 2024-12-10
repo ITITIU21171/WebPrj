@@ -1,0 +1,68 @@
+.container {
+    background: white;
+}
+
+.card-text {
+    text-align: left;
+    color: black;
+}
+
+/* .card-body:hover{
+    color: tomato;
+} */
+
+.card-body{
+    text-align: left;
+}
+
+.card {
+    border: 1px solid rgba(0,0,0,0.5);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    color: tomato;
+    ;
+}
+
+
+.Phan_Trang {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* .Trang {
+    display: flex;
+    list-style-type: none;
+    margin-top: 15px;
+}
+
+.Trang > li {
+    padding: 5px 15px;
+    border: 1px solid #333;
+    margin-right: 5px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+} */
+
+.Trang > li:hover {
+    color: white;
+    background-color: #333;
+}
+
+.Trang_1 {
+    color: white;
+    background-color: #333;
+}
+
+.col {
+    text-align: -webkit-center;
+}
+
