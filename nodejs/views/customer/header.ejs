@@ -5,7 +5,7 @@
         </li>
         <li>
             <form class="d-flex" style="margin-top: 11%;" method="post" action="/customer/san-pham/search">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm ..." aria-label="Search" name="search">
+                <input class="form-control me-2" type="search" placeholder="Search ..." aria-label="Search" name="search">
                 <button class="btn btn-outline-success" type="submit" style="color: white">Search</button>
             </form>
         </li>
@@ -48,7 +48,7 @@
         <% } else { %>
             <li class="nav-item dropdown" id="dropdown">
                 <button class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: rgba(0,232,93,0.5); color: white;border: 0px;">
-                Tài khoản: <%= sessionID.TenTK %>
+                Account: <%= sessionID.TenTK %>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/customer/changePass">Change Password</a></li>
