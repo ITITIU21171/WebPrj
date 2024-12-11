@@ -15,8 +15,8 @@
                             <div class="card-body">
                                 Name: <%= dataSp.TenSanPham %><br>
                                 Origin: <%= dataSp.XuatXu %><br>
-                                Price: <%= dataSp.GiaBan %>/kg<br>
-                                Quantity:  <%= dataSp.SoLuong %>kg
+                                Price: <%= dataSp.GiaBan %><br>
+                                Quantity:  <%= dataSp.SoLuong %>
                             </div>
                             </div></a>
                         </div>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin: 10px 0px;">
-                <button class="btn btn-primary me-md-2" type="button" style="background: #00e85d;border-color: #00e85d;"><a href="/customer/san-pham/loai-san-pham/<%= dataLsp.ID %>">Xem tất cả <i class="fa fa-arrow-right" aria-hidden="true"></i></a></button>
+                <button class="btn btn-primary me-md-2" type="button" style="background: #00e85d;border-color: #00e85d;"><a href="/customer/san-pham/loai-san-pham/<%= dataLsp.ID %>">View all <i class="fa fa-arrow-right" aria-hidden="true"></i></a></button>
             </div>
         </div>
     <% }) %>

@@ -4,7 +4,7 @@
         <a href="/admin/thong-ke"><input type="button" value="Hôm nay"></a>
         From: <input type="date" value="" id="dateToday_start" onclick="todayMax()" name="dateStart">
         To: <input type="date" id="dateToday_end" onclick="todayMin()" name="dateEnd">
-        <input type="submit" value="Thống kê">
+        <input type="submit" value="Statistics">
     </form>
     <div id="piechart" style="text-align: -webkit-center;"></div>
     <div>
@@ -77,7 +77,7 @@
         <% }) %>
       ]);
   
-      var options = { 'title': 'Thống kê từ: <%= dateStart %> đến: <%= dateEnd %>', 'width': 950, 'height': 550 , 'margin-right': 0};
+      var options = { 'title': 'Statistics from: <%= dateStart %> to: <%= dateEnd %>', 'width': 950, 'height': 550 , 'margin-right': 0};
   
       var chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
       chart.draw(data, options);

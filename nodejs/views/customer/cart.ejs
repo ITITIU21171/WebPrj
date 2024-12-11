@@ -11,7 +11,7 @@
             <td>No.</td>
             <td>Name</td>
             <td>Origin</td>
-            <td>Price/kg</td>
+            <td>Price</td>
             <td>Quantity</td>
             <td>Total</td>
             <td>Delete</td>
@@ -50,8 +50,8 @@
                 <%  tong += data.ThanhTien ;
                 }) %>
                 <tfoot>
-                    <td colspan="5" style="text-align: right; border-right: 1px solid #333;">Tổng:</td>
-                    <td><%= number_format(tong) %> <sup>vnđ</sup></td>
+                    <td colspan="5" style="text-align: right; border-right: 1px solid #333;">Total:</td>
+                    <td><%= number_format(tong) %> <sup>VND</sup></td>
                     <td></td>
                 </tfoot>
         <% } %>
