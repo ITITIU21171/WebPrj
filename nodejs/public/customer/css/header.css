@@ -1,6 +1,6 @@
 .justify-content-center {
     justify-content: space-evenly !important;
-    background: rgba(0,232,93,1);
+    background: rgba(72, 72, 72, 1); /* Muted grey */
     padding-top: 10px;
     padding-bottom: 10px;
     color: white;
@@ -18,7 +18,7 @@
 
 .dropdown-menu {
     font-size: 30px;
-    background: rgba(0,232,93,0.5);
+    background: rgba(72, 72, 72, 0.5); /* Muted grey with transparency */
 }
 
 .dropdown-item {
@@ -26,8 +26,8 @@
 }
 
 .dropdown-item:hover {
-    background: rgba(0,232,93,1);
-    color: rgba(240,154,17,1);
+    background: rgba(72, 72, 72, 1); /* Muted grey */
+    color: rgba(192, 192, 192, 1); /* Light grey */
 }
 
 a {
@@ -36,9 +36,8 @@ a {
 }
 
 a:hover, .fa-cart-plus:hover {
-    color: rgba(240,154,17,1);
+    color: rgba(192, 192, 192, 1); /* Light grey */
 }
-
 
 img.slide:not(:first-child) {
     display: none;

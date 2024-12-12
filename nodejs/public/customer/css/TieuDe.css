@@ -1,6 +1,6 @@
 .Tieu_de div {
     line-height: 37px;
-    background: #61b000;
+    background: #4B6F8F; /* Greyish blue */
     float: left;
     padding: 0px 20px;
     min-width: 170px;
@@ -15,7 +15,7 @@
     width: 0px;
     content: '';
     border-top: 37px solid transparent;
-    border-left: 37px solid #61B000;
+    border-left: 37px solid #4B6F8F; /* Greyish blue */
 }
 
 .Tieu_de {
@@ -24,6 +24,6 @@
     height: 37px;
     line-height: 37px;
     text-transform: uppercase;
-    border-bottom: 1px solid #61B000;
+    border-bottom: 1px solid #4B6F8F; /* Greyish blue */
     margin-bottom: 5px;
 }
