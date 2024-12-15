@@ -1,0 +1,384 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE TABLE `cthoadon` (
+  `ID` int(11) NOT NULL,
+  `ID_HoaDon` int(11) NOT NULL,
+  `IDSanPham` int(11) NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `ThanhTien` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `cthoadon`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `giohang`
+--
+
+CREATE TABLE `giohang` (
+  `ID` int(11) NOT NULL,
+  `IDTK` int(11) NOT NULL,
+  `IDSanPham` int(11) NOT NULL,
+  `TenSanPham` varchar(100) NOT NULL,
+  `XuatXu` varchar(100) NOT NULL,
+  `DonGia` float NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `ThanhTien` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `hoadon`
+--
+
+CREATE TABLE `hoadon` (
+  `ID` int(11) NOT NULL,
+  `IDTK` int(11) NOT NULL,
+  `TenKH` varchar(100) NOT NULL,
+  `DiaChi` varchar(100) NOT NULL,
+  `SDT` varchar(10) NOT NULL,
+  `TongTien` float NOT NULL,
+  `NgayMua` datetime NOT NULL,
+  `GhiChu` varchar(200) NOT NULL,
+  `TrangThai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `hoadon`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `lichsusanpham`
+--
+
+CREATE TABLE `lichsusanpham` (
+  `ID` int(11) NOT NULL,
+  `LoaiSanPham` varchar(255) NOT NULL,
+  `Image` varchar(255) NOT NULL,
+  `TenSanPham` varchar(255) NOT NULL,
+  `GiaNhap` varchar(255) NOT NULL,
+  `GiaBan` varchar(255) NOT NULL,
+  `SoLuong` varchar(255) NOT NULL,
+  `NgayNhap` varchar(255) NOT NULL,
+  `XuatXu` varchar(255) NOT NULL,
+  `NgayThaoTac` datetime NOT NULL,
+  `ThaoTac` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `lichsusanpham`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `loaisanpham`
+--
+
+CREATE TABLE `loaisanpham` (
+  `ID` int(11) NOT NULL,
+  `Ten` varchar(100) NOT NULL,
+  `NgayThem` datetime NOT NULL,
+  `update_at` datetime NOT NULL,
+  `showw` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `loaisanpham`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `sanpham`
+--
+
+CREATE TABLE `sanpham` (
+  `ID` int(11) NOT NULL,
+  `ID_LoaiSanPham` int(11) NOT NULL,
+  `TenSanPham` varchar(100) NOT NULL,
+  `imgName` text NOT NULL,
+  `Image` longtext NOT NULL,
+  `GiaNhap` float NOT NULL,
+  `GiaBan` float NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `NgayNhap` datetime NOT NULL,
+  `update_at` datetime NOT NULL,
+  `XuatXu` int(11) NOT NULL,
+  `show_lsp` int(11) NOT NULL,
+  `show_xx` int(11) NOT NULL,
+  `show_sp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `sanpham`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `taikhoan_admin`
+--
+
+CREATE TABLE `taikhoan_admin` (
+  `ID` int(11) NOT NULL,
+  `TenTK` varchar(100) NOT NULL,
+  `MatKhau` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `taikhoan_admin`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `taikhoan_kh`
+--
+
+CREATE TABLE `taikhoan_kh` (
+  `ID` int(11) NOT NULL,
+  `TenTK` varchar(100) NOT NULL,
+  `MatKhau` varchar(100) NOT NULL,
+  `TrangThai` int(11) NOT NULL,
+  `NgayDK` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `taikhoan_kh`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `trangthai`
+--
+
+CREATE TABLE `trangthai` (
+  `ID` int(11) NOT NULL,
+  `TenTT` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `trangthai`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `xuatxu`
+--
+
+CREATE TABLE `xuatxu` (
+  `ID` int(11) NOT NULL,
+  `XuatXu` varchar(100) NOT NULL,
+  `NgayThem` datetime NOT NULL,
+  `update_at` datetime DEFAULT NULL,
+  `showw` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `xuatxu`
+--
+
+
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `cthoadon`
+--
+ALTER TABLE `cthoadon`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID_HoaDon` (`ID_HoaDon`),
+  ADD KEY `sanpham` (`IDSanPham`);
+
+--
+-- Chỉ mục cho bảng `giohang`
+--
+ALTER TABLE `giohang`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDTK` (`IDTK`);
+
+--
+-- Chỉ mục cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDTK` (`IDTK`),
+  ADD KEY `TrangThai` (`TrangThai`);
+
+--
+-- Chỉ mục cho bảng `lichsusanpham`
+--
+ALTER TABLE `lichsusanpham`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `loaisanpham`
+--
+ALTER TABLE `loaisanpham`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `sanpham`
+--
+ALTER TABLE `sanpham`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID_LoaiSanPham` (`ID_LoaiSanPham`),
+  ADD KEY `XuatXu` (`XuatXu`);
+
+--
+-- Chỉ mục cho bảng `taikhoan_admin`
+--
+ALTER TABLE `taikhoan_admin`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `taikhoan_kh`
+--
+ALTER TABLE `taikhoan_kh`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `trangthai`
+--
+ALTER TABLE `trangthai`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `xuatxu`
+--
+ALTER TABLE `xuatxu`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `cthoadon`
+--
+ALTER TABLE `cthoadon`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT cho bảng `giohang`
+--
+ALTER TABLE `giohang`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT cho bảng `lichsusanpham`
+--
+ALTER TABLE `lichsusanpham`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT cho bảng `loaisanpham`
+--
+ALTER TABLE `loaisanpham`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT cho bảng `sanpham`
+--
+ALTER TABLE `sanpham`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- AUTO_INCREMENT cho bảng `taikhoan_admin`
+--
+ALTER TABLE `taikhoan_admin`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `taikhoan_kh`
+--
+ALTER TABLE `taikhoan_kh`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT cho bảng `trangthai`
+--
+ALTER TABLE `trangthai`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `xuatxu`
+--
+ALTER TABLE `xuatxu`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `cthoadon`
+--
+ALTER TABLE `cthoadon`
+  ADD CONSTRAINT `cthoadon_ibfk_1` FOREIGN KEY (`ID_HoaDon`) REFERENCES `hoadon` (`ID`),
+  ADD CONSTRAINT `sanpham` FOREIGN KEY (`IDSanPham`) REFERENCES `sanpham` (`ID`);
+
+--
+-- Các ràng buộc cho bảng `giohang`
+--
+ALTER TABLE `giohang`
+  ADD CONSTRAINT `giohang_ibfk_1` FOREIGN KEY (`IDTK`) REFERENCES `taikhoan_kh` (`ID`);
+
+--
+-- Các ràng buộc cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`IDTK`) REFERENCES `taikhoan_kh` (`ID`),
+  ADD CONSTRAINT `hoadon_ibfk_2` FOREIGN KEY (`TrangThai`) REFERENCES `trangthai` (`ID`);
+
+--
+-- Các ràng buộc cho bảng `sanpham`
+--
+ALTER TABLE `sanpham`
+  ADD CONSTRAINT `sanpham_ibfk_1` FOREIGN KEY (`ID_LoaiSanPham`) REFERENCES `loaisanpham` (`ID`),
+  ADD CONSTRAINT `sanpham_ibfk_2` FOREIGN KEY (`XuatXu`) REFERENCES `xuatxu` (`ID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
