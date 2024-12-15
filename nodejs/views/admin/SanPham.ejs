@@ -101,7 +101,7 @@
         <th>Type Of Product</th>
         <th>Image</th>
         <th>Product</th>
-        <th>Listed Price</th>
+        <th>Import Price</th>
         <th>Price</th>
         <th>Quantity</th>
         <th>Added Date</th>
@@ -131,10 +131,10 @@
                 <%= data.GiaNhap %>
             </td>
             <td>
-                <%= data.GiaBan %>
+                <%= data.GiaBan %> 
             </td>
             <td>
-                <%= data.SoLuong %>
+                <%= data.SoLuong %> 
             </td>
             <td>
                 <%= data.NgayNhap %>
@@ -245,10 +245,10 @@
             <label for=""><b>Product: </b></label>
             <input class="input" type="text" placeholder="Input product" name="tenSp" required>
             
-            <label for=""><b>Listed Price: </b></label>
+            <label for=""><b>Import Price: </b></label>
             <input class="input" type="number" placeholder="Input listed price" name="giaNhap" oninput="this.value = Math.abs(this.value)" min="0" required>
             
-            <label for=""><b>Price: </b></label>
+            <label for=""><b>Sale Price: </b></label>
             <input class="input" type="number" placeholder="Input price" name="giaBan" oninput="this.value = Math.abs(this.value)" min="0" required>
             
             <label for=""><b>Quantity: </b></label>

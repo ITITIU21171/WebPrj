@@ -6,7 +6,7 @@
 .register-photo .image-holder {
     display: table-cell;
     width: auto;
-    background: url(../../Robin.jpg);
+    background: url(../../Robin.png);
     background-size: cover
 }
 
