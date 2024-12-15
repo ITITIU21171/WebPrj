@@ -9,7 +9,7 @@ let viewLogin = (req, res) => {
 let postLogin = (req, res) => {
     loginDB.selectLogin(function(data){
         if(!data[0]){
-            res.render('customer/loginCustomer.ejs', {layout: 'customer/loginCustomer.ejs', dataLogin: 'Sai tài khoản hoặc mật khẩu'});
+            res.render('customer/loginCustomer.ejs', {layout: 'customer/loginCustomer.ejs', dataLogin: 'Wrong user name or password'});
             res.end();
         }
         else{
@@ -32,19 +32,19 @@ let viewSignup = (req, res) => {
 
 let postSignup = (req, res) => {
     if(req.body.usename == ''){
-        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'Không được trống tài khoản'});
+        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'Username cannot empty'});
         res.end();
     }
     if(req.body.password == ''){
-        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'Không được trống mật khẩu'});
+        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'Password cannot empty'});
         res.end();
     }
     if(req.body.password != req.body.password_repeat){
-        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'Mật khẩu nhập lại không đúng'});
+        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'Not match'});
         res.end();
     }
     if(req.body.checkboxx != 'yes'){
-        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'Chưa đồng ý điều khoản'});
+        res.render('customer/signUpCustomer.ejs', {layout: 'customer/signUpCustomer.ejs', dataLogin: 'agree with the term to continue'});
         res.end();
     }
     if(req.body.usename != '' && req.body.password != '' && (req.body.password == req.body.password_repeat) && req.body.checkboxx == 'yes'){
@@ -63,13 +63,13 @@ let changePass = (req, res) => {
 let postChangePass = (req, res) => {
     loginDB.isPass((data) => {
         if (!data[0]){
-            res.send('Sai mật khẩu');
+            res.send('Wrong password');
             res.end();
         }else{
             const pass = req.body.password;
             const pass_repeat = req.body.password_repeat;
             if (pass != pass_repeat){
-                res.send('Mật khẩu nhập lại sai');
+                res.send('New password no match');
                 res.end();
             }else{
                 loginDB.postChangePass((dataChange) => {

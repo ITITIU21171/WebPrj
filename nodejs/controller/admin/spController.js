@@ -58,11 +58,11 @@ let createSp = (req, res) => {
             })
 
         } else {
-            res.send("Trùng tên ảnh");
+            res.send("Duplicate photo name");
             res.end();
         }
     }else{
-        res.send("Dung lượng ảnh không được quá 1mb");
+        res.send("Photo size must not exceed 1mb");
         res.end();
     }
 }
@@ -114,11 +114,11 @@ let updateSp = (req, res) => {
                     
                 })
             }else {
-                res.send("Trùng tên ảnh");
+                res.send("Duplicate photo name");
                 res.end();
             }
         }else{
-            res.send("Dung lượng ảnh không được quá 1mb");
+            res.send("Photo size must not exceed 1mb");
             res.end();
         }
     }

@@ -9,7 +9,7 @@ let postLogin = (req, res) => {
     
     loginDB.selectLogin(function(data){
         if(!data[0]){
-            res.render('admin/loginAdmin.ejs', {dataLogin: 'Sai tài khoản hoặc mật khẩu'});
+            res.render('admin/loginAdmin.ejs', {dataLogin: 'Wrong username or password'});
             res.end();
         }
         else{

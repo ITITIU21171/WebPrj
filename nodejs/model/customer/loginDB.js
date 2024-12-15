@@ -14,7 +14,7 @@ function selectLogin(result, tk, mk) {
 
 function postSignUp(result, tk, mk) {
     connection.query(
-        'INSERT INTO taikhoan_kh`(TenTK`, MatKhau, TrangThai, NgayDK) VALUES (?, ?, 1, now())', [tk, mk],
+        'INSERT INTO `taikhoan_kh`(`TenTK`, MatKhau, TrangThai, NgayDK) VALUES (?, ?, 1, now())', [tk, mk],
         function(err, results) {
             if (err) throw err;
 
