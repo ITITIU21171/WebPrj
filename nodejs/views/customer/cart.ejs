@@ -28,7 +28,7 @@
                         <td><%= dem += 1 %></td>
                         <td><%= data.TenSanPham %></td>
                         <td><%= data.XuatXu %></td>
-                        <td><%= number_format(data.DonGia) %> <sup>VND</sup></td>
+                        <td><%= number_format(data.DonGia) %> <sup>$</sup></td>
                         <td>
                             <form action="/customer/cart/update" method="post">
                                 <input class="input_table" type="number" name="SoLuong" value="<%= data.SoLuong %>" min="1" max="<%= data.SoLuongSpTrongKho + data.SoLuong %>" oninput="this.value = Math.abs(this.value)" required>
@@ -37,7 +37,7 @@
                                 <input type="submit" value="Update">
                             </form>
                         </td>
-                        <td><%= number_format(data.ThanhTien) %> <sup>VND</sup></td>
+                        <td><%= number_format(data.ThanhTien) %> <sup>$</sup></td>
                         <td>
                             <form action="/customer/cart/delete" method="post">
                                 <input type="text" hidden name="idCart" value="<%= data.ID %>">
@@ -51,7 +51,7 @@
                 }) %>
                 <tfoot>
                     <td colspan="5" style="text-align: right; border-right: 1px solid #333;">Total:</td>
-                    <td><%= number_format(tong) %> <sup>VND</sup></td>
+                    <td><%= number_format(tong) %> <sup>$</sup></td>
                     <td></td>
                 </tfoot>
         <% } %>
@@ -112,7 +112,7 @@
                     <input type="text" hidden required>
                 <% } %>
                 <div style="margin-bottom: 10px; margin-left: 10%;">
-                    <button type="button" class="btn btn-success"><a href="/customer/home" style="text-decoration: none;">Continue shopping</a></button>
+                    <button type="button" class="btn btn-success"><a href="/customer/home" style="text-decoration: none;">Continue Shopping</a></button>
                     <button class="btn btn-danger" type="submit">Order</button>
                 </div>
             </form>
